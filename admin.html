@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>SHAMIL | CHINA — Админка</title>
+  <style>
+    :root{--bg:#f5f1e9;--panel:#fffdf9;--text:#171717;--muted:#746f66;--line:#d8d0c2;--red:#cf2d22;--ok:#18794e}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fbf8f2,#f4efe6);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}
+    .wrap{width:min(980px,100%);margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.brand{font-weight:900;letter-spacing:.03em}.badge{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 12px 30px rgba(70,55,35,.07);margin-bottom:16px}.login{max-width:500px;margin:10vh auto}.hidden{display:none!important}
+    h1{font-size:clamp(30px,6vw,54px);letter-spacing:-.05em;line-height:1;margin:8px 0 18px}h2{font-size:25px;margin:4px 0 16px}.muted{color:var(--muted);font-size:14px}
+    label{display:block;font-size:13px;font-weight:800;margin:14px 0 6px}input,textarea,select{width:100%;border:1px solid var(--line);background:white;border-radius:12px;padding:13px;color:var(--text)}textarea{min-height:110px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checks{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}.check{display:flex;gap:8px;align-items:center}.check input{width:auto}
+    .btn{border:0;border-radius:12px;padding:13px 16px;font-weight:850;cursor:pointer}.primary{background:var(--text);color:white}.red{background:var(--red);color:white}.ghost{background:white;border:1px solid var(--line);color:var(--text)}.danger{color:#a62118}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.status{margin-top:12px;font-size:14px;min-height:20px}.status.ok{color:var(--ok)}.status.err{color:#b42318}
+    .products{display:grid;gap:10px}.item{display:grid;grid-template-columns:68px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:15px;padding:10px;background:white}.thumb{width:68px;height:68px;border-radius:11px;object-fit:cover;background:#eee}.item h3{margin:0 0 3px;font-size:16px}.item p{margin:0;color:var(--muted);font-size:12px}.item-actions{display:flex;gap:6px}.mini{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 10px;cursor:pointer}
+    .photo-note{font-size:12px;color:var(--muted);margin-top:6px}.existing{display:flex;gap:7px;overflow:auto;margin-top:8px}.existing img{width:70px;height:70px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}
+    @media(max-width:650px){.grid{grid-template-columns:1fr}.item{grid-template-columns:58px 1fr}.thumb{width:58px;height:58px}.item-actions{grid-column:1/-1}.top{align-items:flex-start}.wrap{padding:12px}.card{padding:16px;border-radius:18px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">SHAMIL | CHINA 🇨🇳</div><span class="badge">ADMIN</span></div>
+
+  <section id="loginCard" class="card login">
+    <div class="muted">Закрытая панель управления</div>
+    <h1>Вход в админку</h1>
+    <form id="loginForm">
+      <label for="email">Email</label><input id="email" type="email" autocomplete="username" required>
+      <label for="password">Пароль</label><input id="password" type="password" autocomplete="current-password" required>
+      <div class="actions"><button class="btn primary" type="submit">Войти</button></div>
+      <div id="loginStatus" class="status"></div>
+    </form>
+  </section>
+
+  <main id="dashboard" class="hidden">
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><div class="muted">Управление каталогом</div><h1 style="margin-bottom:0">Товары</h1></div><button id="logoutBtn" class="btn ghost" type="button">Выйти</button></div>
+    </section>
+
+    <section class="card">
+      <h2 id="formTitle">Добавить товар</h2>
+      <form id="productForm">
+        <input id="productId" type="hidden">
+        <div class="grid">
+          <div><label for="title">Название *</label><input id="title" required placeholder="Например: Чёрная футболка"></div>
+          <div><label for="brand">Бренд</label><input id="brand" placeholder="Например: Prada"></div>
+          <div><label for="category">Категория</label><select id="category"><option value="other">Другое</option><option value="lv">Louis Vuitton</option><option value="prada">Prada</option></select></div>
+          <div><label for="price">Цена</label><input id="price" value="Уточняйте" placeholder="Например: 6 900 ₽"></div>
+          <div><label for="sizes">Размеры через запятую</label><input id="sizes" placeholder="M, L, XL"></div>
+          <div><label for="colors">Цвета через запятую</label><input id="colors" placeholder="Чёрный, Белый"></div>
+        </div>
+        <label for="description">Описание</label><textarea id="description" placeholder="Коротко о ткани, посадке и деталях"></textarea>
+        <label for="photos">Фотографии</label><input id="photos" type="file" accept="image/*" multiple>
+        <div class="photo-note">Можно выбрать несколько фотографий сразу с iPhone. При редактировании новые фото добавятся к уже загруженным.</div>
+        <div id="existingPhotos" class="existing"></div>
+        <div class="checks">
+          <label class="check"><input id="isReplica" type="checkbox"> Реплика</label>
+          <label class="check"><input id="isPublished" type="checkbox" checked> Опубликовать на сайте</label>
+        </div>
+        <div class="actions"><button id="saveBtn" class="btn red" type="submit">Опубликовать</button><button id="cancelEditBtn" class="btn ghost hidden" type="button">Отменить редактирование</button></div>
+        <div id="formStatus" class="status"></div>
+      </form>
+    </section>
+
+    <section class="card"><h2>Каталог</h2><div id="productsList" class="products"><div class="muted">Загрузка…</div></div></section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://pnsldiahjlnazouskkxk.supabase.co';
+const SUPABASE_KEY='sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ';
+const ADMIN_UID='785cc2ec-5d8c-4143-921a-46a1054d9d79';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentProducts=[];
+
+const $=id=>document.getElementById(id);
+const splitList=v=>v.split(',').map(x=>x.trim()).filter(Boolean);
+const setStatus=(el,msg,type='')=>{el.textContent=msg;el.className='status '+type};
+const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+async function ensureAdmin(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){showLogin();return false}
+  if(session.user.id!==ADMIN_UID){await sb.auth.signOut();showLogin();setStatus($('loginStatus'),'У этого аккаунта нет доступа к админке.','err');return false}
+  showDashboard();await loadProducts();return true;
+}
+function showLogin(){$('loginCard').classList.remove('hidden');$('dashboard').classList.add('hidden')}
+function showDashboard(){$('loginCard').classList.add('hidden');$('dashboard').classList.remove('hidden')}
+
+$('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();setStatus($('loginStatus'),'Входим…');
+  const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+  if(error){setStatus($('loginStatus'),'Не получилось войти: '+error.message,'err');return}
+  if(data.user.id!==ADMIN_UID){await sb.auth.signOut();setStatus($('loginStatus'),'У этого аккаунта нет доступа к админке.','err');return}
+  setStatus($('loginStatus'),'');showDashboard();await loadProducts();
+});
+$('logoutBtn').addEventListener('click',async()=>{await sb.auth.signOut();showLogin()});
+
+async function loadProducts(){
+  $('productsList').innerHTML='<div class="muted">Загрузка…</div>';
+  const {data,error}=await sb.from('products').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false});
+  if(error){$('productsList').innerHTML='<div class="status err">Ошибка загрузки: '+esc(error.message)+'</div>';return}
+  currentProducts=data||[];
+  if(!currentProducts.length){$('productsList').innerHTML='<div class="muted">Пока нет товаров.</div>';return}
+  $('productsList').innerHTML=currentProducts.map(p=>`<div class="item">
+    ${p.image_urls?.[0]?`<img class="thumb" src="${esc(p.image_urls[0])}" alt="">`:'<div class="thumb"></div>'}
+    <div><h3>${esc(p.title)}</h3><p>${esc(p.brand||'Без бренда')} • ${p.is_published?'Опубликован':'Скрыт'}${p.is_replica?' • РЕПЛИКА':''}</p></div>
+    <div class="item-actions"><button class="mini" data-edit="${p.id}" type="button">Изменить</button><button class="mini danger" data-delete="${p.id}" type="button">Удалить</button></div>
+  </div>`).join('');
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));
+  document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteProduct(b.dataset.delete));
+}
+
+function editProduct(id){
+  const p=currentProducts.find(x=>x.id===id);if(!p)return;
+  $('productId').value=p.id;$('title').value=p.title||'';$('brand').value=p.brand||'';$('category').value=p.category||'other';$('price').value=p.price_text||'Уточняйте';$('sizes').value=(p.sizes||[]).join(', ');$('colors').value=(p.colors||[]).join(', ');$('description').value=p.description||'';$('isReplica').checked=!!p.is_replica;$('isPublished').checked=!!p.is_published;
+  $('existingPhotos').innerHTML=(p.image_urls||[]).map(u=>`<img src="${esc(u)}" alt="">`).join('');
+  $('formTitle').textContent='Редактировать товар';$('saveBtn').textContent='Сохранить';$('cancelEditBtn').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetForm(){
+  $('productForm').reset();$('productId').value='';$('price').value='Уточняйте';$('isPublished').checked=true;$('existingPhotos').innerHTML='';$('formTitle').textContent='Добавить товар';$('saveBtn').textContent='Опубликовать';$('cancelEditBtn').classList.add('hidden');setStatus($('formStatus'),'');
+}
+$('cancelEditBtn').onclick=resetForm;
+
+async function uploadPhotos(files,userId){
+  const urls=[];
+  for(const file of files){
+    const safe=(file.name||'photo.jpg').replace(/[^a-zA-Z0-9._-]/g,'-');
+    const path=`${userId}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safe}`;
+    const {error}=await sb.storage.from('product-images').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type||undefined});
+    if(error)throw error;
+    const {data}=sb.storage.from('product-images').getPublicUrl(path);urls.push(data.publicUrl);
+  }
+  return urls;
+}
+
+$('productForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const {data:{user}}=await sb.auth.getUser();if(!user||user.id!==ADMIN_UID){setStatus($('formStatus'),'Сессия закончилась. Войди заново.','err');return}
+  $('saveBtn').disabled=true;setStatus($('formStatus'),'Сохраняем…');
+  try{
+    const id=$('productId').value;
+    const old=id?currentProducts.find(x=>x.id===id):null;
+    const newUrls=await uploadPhotos([...$('photos').files],user.id);
+    const image_urls=[...(old?.image_urls||[]),...newUrls];
+    if(!image_urls.length) throw new Error('Добавь хотя бы одну фотографию.');
+    const payload={title:$('title').value.trim(),brand:$('brand').value.trim()||null,category:$('category').value,price_text:$('price').value.trim()||'Уточняйте',description:$('description').value.trim()||null,sizes:splitList($('sizes').value),colors:splitList($('colors').value),image_urls,is_replica:$('isReplica').checked,is_published:$('isPublished').checked};
+    let error;
+    if(id)({error}=await sb.from('products').update(payload).eq('id',id)); else ({error}=await sb.from('products').insert(payload));
+    if(error)throw error;
+    setStatus($('formStatus'),'Готово ✅ Товар сохранён.','ok');resetForm();await loadProducts();
+  }catch(err){setStatus($('formStatus'),'Ошибка: '+(err.message||err),'err')}
+  finally{$('saveBtn').disabled=false}
+});
+
+async function deleteProduct(id){
+  const p=currentProducts.find(x=>x.id===id);if(!p)return;
+  if(!confirm(`Удалить «${p.title}»?`))return;
+  const {error}=await sb.from('products').delete().eq('id',id);
+  if(error){alert('Не получилось удалить: '+error.message);return}
+  await loadProducts();
+}
+
+ensureAdmin();
+</script>
+</body>
+</html>
