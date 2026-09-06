@@ -1,1 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Личный кабинет — SHAMIL | CHINA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f3efe7;
+      color: #171717;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 24px 18px 50px;
+    }
+
+    .top {
+      max-width: 520px;
+      margin: 0 auto 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .back {
+      font-size: 13px;
+      opacity: .65;
+    }
+
+    .account-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fffdf8;
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.07);
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      opacity: .5;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      line-height: 1.5;
+      font-size: 14px;
+      opacity: .62;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #ece7dd;
+      border-radius: 15px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      border: 0;
+      padding: 12px;
+      border-radius: 12px;
+      background: transparent;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #171717;
+      color: white;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      margin: 17px 0 7px;
+      opacity: .7;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px 16px;
+      border: 1px solid #d8d1c6;
+      background: white;
+      border-radius: 14px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #171717;
+    }
+
+    .main-btn {
+      width: 100%;
+      margin-top: 22px;
+      padding: 16px;
+      border: 0;
+      border-radius: 15px;
+      background: #171717;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .main-btn:disabled {
+      opacity: .5;
+    }
+
+    .status {
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 16px;
+      min-height: 18px;
+    }
+
+    .status.ok {
+      color: #17763a;
+    }
+
+    .status.err {
+      color: #b42318;
+    }
+
+    /* ЛИЧНЫЙ КАБИНЕТ */
+
+    #profileView {
+      display: none;
+    }
+
+    .member-badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 100px;
+      background: #171717;
+      color: white;
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      margin: 12px 0 24px;
+    }
+
+    .bonus-card {
+      background: #171717;
+      color: white;
+      border-radius: 23px;
+      padding: 23px;
+      margin-top: 8px;
+    }
+
+    .bonus-label {
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      opacity: .6;
+    }
+
+    .bonus-number {
+      margin-top: 8px;
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .bonus-word {
+      font-size: 13px;
+      opacity: .6;
+    }
+
+    .profile-info {
+      margin-top: 24px;
+      border-top: 1px solid #e4ded4;
+    }
+
+    .info-row {
+      padding: 16px 0;
+      border-bottom: 1px solid #e4ded4;
+    }
+
+    .info-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      opacity: .45;
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 15px;
+      background: transparent;
+      border: 1px solid #cfc8bd;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px 0;
+      opacity: .5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="top">
+      <a class="brand" href="/">SHAMIL | CHINA 🇨🇳</a>
+      <a class="back" href="/">← На главную</a>
+    </div>
+
+    <div class="account-card">
+
+      <div id="loadingView" class="loading">
+        Загружаем…
+      </div>
+
+      <!-- ВХОД / РЕГИСТРАЦИЯ -->
+
+      <div id="authView" style="display:none;">
+
+        <div class="kicker">SHAMIL MEMBERS</div>
+
+        <h1>Личный кабинет</h1>
+
+        <p class="subtitle">
+          Регистрируйся, копи бонусы и получай преимущества постоянного клиента.
+        </p>
+
+        <div class="tabs">
+          <button
+            id="loginTab"
+            class="tab active"
+            type="button"
+          >
+            Войти
+          </button>
+
+          <button
+            id="registerTab"
+            class="tab"
+            type="button"
+          >
+            Регистрация
+          </button>
+        </div>
+
+        <!-- ВХОД -->
+
+        <div id="loginForm" class="form active">
+
+          <label>Email</label>
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="example@mail.com"
+            autocomplete="email"
+          >
+
+          <label>Пароль</label>
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Ваш пароль"
+            autocomplete="current-password"
+          >
+
+          <button
+            id="loginBtn"
+            class="main-btn"
+            type="button"
+          >
+            Войти
+          </button>
+
+          <div
+            id="loginStatus"
+            class="status"
+          ></div>
+
+        </div>
+
+
+        <!-- РЕГИСТРАЦИЯ -->
+
+        <div id="registerForm" class="form">
+
+          <label>Имя</label>
+          <input
+            id="registerName"
+            type="text"
+            placeholder="Ваше имя"
+            autocomplete="name"
+          >
+
+          <label>Email</label>
+          <input
+            id="registerEmail"
+            type="email"
+            placeholder="example@mail.com"
+            autocomplete="email"
+          >
+
+          <label>Пароль</label>
+          <input
+            id="registerPassword"
+            type="password"
+            placeholder="Минимум 6 символов"
+            autocomplete="new-password"
+          >
+
+          <button
+            id="registerBtn"
+            class="main-btn"
+            type="button"
+          >
+            Создать аккаунт
+          </button>
+
+          <div
+            id="registerStatus"
+            class="status"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ПРОФИЛЬ -->
+
+      <div id="profileView">
+
+        <div class="kicker">
+          SHAMIL MEMBERS
+        </div>
+
+        <h1 id="profileName">
+          Мой аккаунт
+        </h1>
+
+        <div
+          id="memberLevel"
+          class="member-badge"
+        >
+          START MEMBER
+        </div>
+
+        <div class="bonus-card">
+
+          <div class="bonus-label">
+            БОНУСНЫЙ БАЛАНС
+          </div>
+
+          <div
+            id="bonusBalance"
+            class="bonus-number"
+          >
+            0
+          </div>
+
+          <div class="bonus-word">
+            бонусов
+          </div>
+
+        </div>
+
+        <div class="profile-info">
+
+          <div class="info-row">
+            <span class="info-label">EMAIL</span>
+            <div
+              id="profileEmail"
+              class="info-value"
+            ></div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">УРОВЕНЬ</span>
+            <div
+              id="profileLevel"
+              class="info-value"
+            >
+              START
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">СУММА ПОКУПОК</span>
+            <div
+              id="totalSpent"
+              class="info-value"
+            >
+              0 ₽
+            </div>
+          </div>
+
+        </div>
+
+        <button
+          id="logoutBtn"
+          class="logout"
+          type="button"
+        >
+          Выйти из аккаунта
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      'https://pnsldiahjlnazouskkxk.supabase.co';
+
+    const SUPABASE_KEY =
+      'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ';
+
+    const client =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    const $ = id =>
+      document.getElementById(id);
+
+
+    function status(el, text, type = '') {
+
+      el.textContent = text;
+      el.className =
+        'status' + (type ? ' ' + type : '');
+
+    }
+
+
+    /* =========================
+       ВКЛАДКИ
+    ========================= */
+
+    $('loginTab').onclick = () => {
+
+      $('loginTab').classList.add('active');
+      $('registerTab').classList.remove('active');
+
+      $('loginForm').classList.add('active');
+      $('registerForm').classList.remove('active');
+
+    };
+
+
+    $('registerTab').onclick = () => {
+
+      $('registerTab').classList.add('active');
+      $('loginTab').classList.remove('active');
+
+      $('registerForm').classList.add('active');
+      $('loginForm').classList.remove('active');
+
+    };
+
+
+    /* =========================
+       РЕГИСТРАЦИЯ
+    ========================= */
+
+    $('registerBtn').onclick =
+      async () => {
+
+        const name =
+          $('registerName').value.trim();
+
+        const email =
+          $('registerEmail').value.trim();
+
+        const password =
+          $('registerPassword').value;
+
+
+        if(!name || !email || !password){
+
+          status(
+            $('registerStatus'),
+            'Заполни все поля.',
+            'err'
+          );
+
+          return;
+        }
+
+
+        if(password.length < 6){
+
+          status(
+            $('registerStatus'),
+            'Пароль должен содержать минимум 6 символов.',
+            'err'
+          );
+
+          return;
+        }
+
+
+        $('registerBtn').disabled = true;
+
+        status(
+          $('registerStatus'),
+          'Создаём аккаунт…'
+        );
+
+
+        const {
+          data,
+          error
+        } = await client.auth.signUp({
+
+          email,
+          password,
+
+          options: {
+            data: {
+              name
+            }
+          }
+
+        });
+
+
+        $('registerBtn').disabled = false;
+
+
+        if(error){
+
+          status(
+            $('registerStatus'),
+            error.message,
+            'err'
+          );
+
+          return;
+        }
+
+
+        if(data.session){
+
+          await showProfile();
+
+        } else {
+
+          status(
+            $('registerStatus'),
+            'Аккаунт создан ✅ Проверь email и подтверди регистрацию.',
+            'ok'
+          );
+
+        }
+
+      };
+
+
+    /* =========================
+       ВХОД
+    ========================= */
+
+    $('loginBtn').onclick =
+      async () => {
+
+        const email =
+          $('loginEmail').value.trim();
+
+        const password =
+          $('loginPassword').value;
+
+
+        if(!email || !password){
+
+          status(
+            $('loginStatus'),
+            'Введи email и пароль.',
+            'err'
+          );
+
+          return;
+        }
+
+
+        $('loginBtn').disabled = true;
+
+        status(
+          $('loginStatus'),
+          'Входим…'
+        );
+
+
+        const {
+          error
+        } =
+          await client.auth.signInWithPassword({
+            email,
+            password
+          });
+
+
+        $('loginBtn').disabled = false;
+
+
+        if(error){
+
+          status(
+            $('loginStatus'),
+            'Неверный email или пароль.',
+            'err'
+          );
+
+          return;
+        }
+
+
+        await showProfile();
+
+      };
+
+
+    /* =========================
+       ЛИЧНЫЙ КАБИНЕТ
+    ========================= */
+
+    async function showProfile(){
+
+      const {
+        data: { user }
+      } =
+        await client.auth.getUser();
+
+
+      if(!user){
+
+        $('loadingView').style.display =
+          'none';
+
+        $('profileView').style.display =
+          'none';
+
+        $('authView').style.display =
+          'block';
+
+        return;
+      }
+
+
+      const {
+        data: profile,
+        error
+      } =
+        await client
+          .from('profiles')
+          .select(
+            'name, bonus_balance, total_spent, member_level'
+          )
+          .eq('id', user.id)
+          .maybeSingle();
+
+
+      $('loadingView').style.display =
+        'none';
+
+      $('authView').style.display =
+        'none';
+
+      $('profileView').style.display =
+        'block';
+
+
+      if(error){
+
+        console.error(error);
+
+      }
+
+
+      const name =
+        profile?.name ||
+        user.user_metadata?.name ||
+        'Мой аккаунт';
+
+
+      const level =
+        profile?.member_level ||
+        'START';
+
+
+      $('profileName').textContent =
+        name;
+
+      $('profileEmail').textContent =
+        user.email || '';
+
+      $('bonusBalance').textContent =
+        Number(
+          profile?.bonus_balance || 0
+        ).toLocaleString('ru-RU');
+
+      $('memberLevel').textContent =
+        level + ' MEMBER';
+
+      $('profileLevel').textContent =
+        level;
+
+      $('totalSpent').textContent =
+        Number(
+          profile?.total_spent || 0
+        ).toLocaleString('ru-RU') + ' ₽';
+
+    }
+
+
+    /* =========================
+       ВЫХОД
+    ========================= */
+
+    $('logoutBtn').onclick =
+      async () => {
+
+        await client.auth.signOut();
+
+        $('profileView').style.display =
+          'none';
+
+        $('authView').style.display =
+          'block';
+
+      };
+
+
+    /* =========================
+       ПРОВЕРКА ПРИ ЗАГРУЗКЕ
+    ========================= */
+
+    showProfile();
+
+  </script>
+
+</body>
+</html>
