@@ -535,13 +535,12 @@
           <div>
 
             <label for="brand">
-              Бренд
-            </label>
+  Бренд
+</label>
 
-            <input
-              id="brand"
-              placeholder="Например: Prada"
-            >
+<select id="brand">
+  <option value="">Без бренда</option>
+</select>
 
           </div>
 
@@ -1126,7 +1125,37 @@ async function loadBrands(){
     );
     return;
   }
+async function loadBrands(){
 
+  const { data, error } = await sb
+    .from('brands')
+    .select('*')
+    .order('name');
+
+  if(error){
+    setStatus(
+      $('brandStatus'),
+      'Ошибка загрузки брендов: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  const brandSelect = $('brand');
+
+  if(brandSelect){
+    const currentValue = brandSelect.value;
+
+    brandSelect.innerHTML =
+      '<option value="">Без бренда</option>' +
+      (data || []).map(brand =>
+        `<option value="${esc(brand.name)}">${esc(brand.name)}</option>`
+      ).join('');
+
+    brandSelect.value = currentValue;
+  }
+
+  $('brandsList').innerHTML = (data || []).map(brand => `
   $('brandsList').innerHTML = (data || []).map(brand => `
     <div class="item">
       <div>
