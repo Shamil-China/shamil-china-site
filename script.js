@@ -154,6 +154,7 @@ function renderDatabaseProducts(rows){
     const article = document.createElement('article');
 
     article.className = 'product';
+    article.dataset.brand = row.brand || '';
     article.dataset.category = row.category || 'other';
 
     const replicaTag =
@@ -258,3 +259,75 @@ function toggleCatalogMenu(){
   sub?.classList.toggle('open');
   btn?.classList.toggle('open');
 }
+async function loadCatalogBrands(){
+
+  const filters = document.getElementById('brandFilters');
+
+  if(!filters){
+    return;
+  }
+
+  const { data, error } = await sb
+    .from('brands')
+    .select('name, slug')
+    .order('name');
+
+  if(error){
+    return;
+  }
+
+  filters.innerHTML = `
+    <button
+      class="filter active"
+      data-filter="all"
+    >
+      Все
+    </button>
+  ` + (data || []).map(brand => `
+    <button
+      class="filter"
+      data-filter="${brand.slug}"
+      data-brand-name="${brand.name}"
+    >
+      ${brand.name}
+    </button>
+  `).join('');
+
+  filters
+    .querySelectorAll('.filter')
+    .forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        filters
+          .querySelectorAll('.filter')
+          .forEach(btn =>
+            btn.classList.remove('active')
+          );
+
+        button.classList.add('active');
+
+        const brandName =
+          button.dataset.brandName || 'all';
+
+        document
+          .querySelectorAll('.product-card')
+          .forEach(card => {
+
+            const cardBrand =
+              card.dataset.brand || '';
+
+            card.style.display =
+              brandName === 'all' ||
+              cardBrand === brandName
+                ? ''
+                : 'none';
+
+          });
+
+      });
+
+    });
+}
+
+loadCatalogBrands();
