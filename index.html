@@ -59,7 +59,7 @@
       <div class="trust"><span>Фото и видео перед заказом</span><span>Подбор размера</span><span>Отправка из Китая</span></div>
     </div>
     <div class="hero-visual">
-      <img src="lv_brown_1.jpg" alt="Мужская футболка">
+      <img id="heroImage" src="lv_brown_1.jpg" alt="Мужская одежда SHAMIL CHINA">
       <div class="hero-label">NEW SELECTION</div>
     </div>
   </section>
@@ -127,6 +127,24 @@
 </div>
 
 <footer><b>SHAMIL | CHINA 🇨🇳</b><div class="footer-links"><a href="https://www.instagram.com/shamil.china_/" target="_blank" rel="noopener">Instagram</a><a href="https://t.me/Shamil_China05" target="_blank" rel="noopener">Telegram</a><span>Guangzhou • 2026</span></div></footer>
-<script src="script.js"></script>
+<script>
+fetch(
+  'https://pnsldiahjlnazouskkxk.supabase.co/rest/v1/site_settings?select=hero_image_url&id=eq.home',
+  {
+    headers: {
+      'apikey': 'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ',
+      'Authorization': 'Bearer sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ'
+    }
+  }
+)
+.then(r => r.json())
+.then(data => {
+  if (data?.[0]?.hero_image_url) {
+    document.getElementById('heroImage').src = data[0].hero_image_url;
+  }
+})
+.catch(() => {});
+</script>
+ <script src="script.js"></script>
 </body>
 </html>
