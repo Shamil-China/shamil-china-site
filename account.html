@@ -2,14 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Личный кабинет — SHAMIL | CHINA</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -19,10 +16,7 @@
       color: #171717;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .page {
       min-height: 100vh;
@@ -35,6 +29,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
 
     .brand {
@@ -46,6 +41,7 @@
     .back {
       font-size: 13px;
       opacity: .65;
+      white-space: nowrap;
     }
 
     .account-card {
@@ -101,13 +97,8 @@
       color: white;
     }
 
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
+    .form { display: none; }
+    .form.active { display: block; }
 
     label {
       display: block;
@@ -126,9 +117,7 @@
       font-size: 16px;
     }
 
-    input:focus {
-      border-color: #171717;
-    }
+    input:focus { border-color: #171717; }
 
     .main-btn {
       width: 100%;
@@ -143,9 +132,7 @@
       cursor: pointer;
     }
 
-    .main-btn:disabled {
-      opacity: .5;
-    }
+    .main-btn:disabled { opacity: .5; }
 
     .status {
       font-size: 13px;
@@ -154,19 +141,10 @@
       min-height: 18px;
     }
 
-    .status.ok {
-      color: #17763a;
-    }
+    .status.ok { color: #17763a; }
+    .status.err { color: #b42318; }
 
-    .status.err {
-      color: #b42318;
-    }
-
-    /* ЛИЧНЫЙ КАБИНЕТ */
-
-    #profileView {
-      display: none;
-    }
+    #profileView { display: none; }
 
     .member-badge {
       display: inline-block;
@@ -248,644 +226,329 @@
 </head>
 
 <body>
-
   <div class="page">
-
     <div class="top">
       <a class="brand" href="/">SHAMIL | CHINA 🇨🇳</a>
       <a class="back" href="/">← На главную</a>
     </div>
 
     <div class="account-card">
-
-      <div id="loadingView" class="loading">
-        Загружаем…
-      </div>
-
-      <!-- ВХОД / РЕГИСТРАЦИЯ -->
+      <div id="loadingView" class="loading">Загружаем…</div>
 
       <div id="authView" style="display:none;">
-
         <div class="kicker">SHAMIL MEMBERS</div>
-
         <h1>Личный кабинет</h1>
-
         <p class="subtitle">
           Регистрируйся, копи бонусы и получай преимущества постоянного клиента.
         </p>
 
         <div class="tabs">
-          <button
-            id="loginTab"
-            class="tab active"
-            type="button"
-          >
-            Войти
-          </button>
-
-          <button
-            id="registerTab"
-            class="tab"
-            type="button"
-          >
-            Регистрация
-          </button>
+          <button id="loginTab" class="tab active" type="button">Войти</button>
+          <button id="registerTab" class="tab" type="button">Регистрация</button>
         </div>
-
-        <!-- ВХОД -->
 
         <div id="loginForm" class="form active">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" placeholder="example@mail.com" autocomplete="email">
 
-          <label>Email</label>
-          <input
-            id="loginEmail"
-            type="email"
-            placeholder="example@mail.com"
-            autocomplete="email"
-          >
+          <label for="loginPassword">Пароль</label>
+          <input id="loginPassword" type="password" placeholder="Ваш пароль" autocomplete="current-password">
 
-          <label>Пароль</label>
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="Ваш пароль"
-            autocomplete="current-password"
-          >
-
-          <button
-            id="loginBtn"
-            class="main-btn"
-            type="button"
-          >
-            Войти
-          </button>
-
-          <div
-            id="loginStatus"
-            class="status"
-          ></div>
-
+          <button id="loginBtn" class="main-btn" type="button">Войти</button>
+          <div id="loginStatus" class="status"></div>
         </div>
-
-
-        <!-- РЕГИСТРАЦИЯ -->
 
         <div id="registerForm" class="form">
+          <label for="registerName">Имя</label>
+          <input id="registerName" type="text" placeholder="Ваше имя" autocomplete="name">
 
-          <label>Имя</label>
-          <input
-            id="registerName"
-            type="text"
-            placeholder="Ваше имя"
-            autocomplete="name"
-          >
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" type="email" placeholder="example@mail.com" autocomplete="email">
 
-          <label>Email</label>
-          <input
-            id="registerEmail"
-            type="email"
-            placeholder="example@mail.com"
-            autocomplete="email"
-          >
+          <label for="registerPassword">Пароль</label>
+          <input id="registerPassword" type="password" placeholder="Минимум 6 символов" autocomplete="new-password">
 
-          <label>Пароль</label>
-          <input
-            id="registerPassword"
-            type="password"
-            placeholder="Минимум 6 символов"
-            autocomplete="new-password"
-          >
-
-          <button
-            id="registerBtn"
-            class="main-btn"
-            type="button"
-          >
-            Создать аккаунт
-          </button>
-
-          <div
-            id="registerStatus"
-            class="status"
-          ></div>
-
+          <button id="registerBtn" class="main-btn" type="button">Создать аккаунт</button>
+          <div id="registerStatus" class="status"></div>
         </div>
-<div id="verifyForm" class="form">
-  <label>Код из письма</label>
 
-  <input
-    id="verifyCode"
-    type="text"
-    inputmode="numeric"
-    autocomplete="one-time-code"
-    placeholder="Введите код"
-  >
+        <div id="verifyForm" class="form">
+          <label for="verifyCode">Код из письма</label>
+          <input id="verifyCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="Введите код">
 
-  <button
-    id="verifyBtn"
-    class="main-btn"
-    type="button"
-  >
-    Подтвердить email
-  </button>
-
-  <div
-    id="verifyStatus"
-    class="status"
-  ></div>
-</div>
+          <button id="verifyBtn" class="main-btn" type="button">Подтвердить email</button>
+          <div id="verifyStatus" class="status"></div>
+        </div>
       </div>
 
-
-      <!-- ПРОФИЛЬ -->
-
       <div id="profileView">
-
-        <div class="kicker">
-          SHAMIL MEMBERS
-        </div>
-
-        <h1 id="profileName">
-          Мой аккаунт
-        </h1>
-
-        <div
-          id="memberLevel"
-          class="member-badge"
-        >
-          START MEMBER
-        </div>
+        <div class="kicker">SHAMIL MEMBERS</div>
+        <h1 id="profileName">Мой аккаунт</h1>
+        <div id="memberLevel" class="member-badge">START MEMBER</div>
 
         <div class="bonus-card">
-
-          <div class="bonus-label">
-            БОНУСНЫЙ БАЛАНС
-          </div>
-
-          <div
-            id="bonusBalance"
-            class="bonus-number"
-          >
-            0
-          </div>
-
-          <div class="bonus-word">
-            бонусов
-          </div>
-
+          <div class="bonus-label">БОНУСНЫЙ БАЛАНС</div>
+          <div id="bonusBalance" class="bonus-number">0</div>
+          <div class="bonus-word">бонусов</div>
         </div>
 
         <div class="profile-info">
-
           <div class="info-row">
             <span class="info-label">EMAIL</span>
-            <div
-              id="profileEmail"
-              class="info-value"
-            ></div>
+            <div id="profileEmail" class="info-value"></div>
           </div>
 
           <div class="info-row">
             <span class="info-label">УРОВЕНЬ</span>
-            <div
-              id="profileLevel"
-              class="info-value"
-            >
-              START
-            </div>
+            <div id="profileLevel" class="info-value">START</div>
           </div>
 
           <div class="info-row">
             <span class="info-label">СУММА ПОКУПОК</span>
-            <div
-              id="totalSpent"
-              class="info-value"
-            >
-              0 ₽
-            </div>
+            <div id="totalSpent" class="info-value">0 ₽</div>
           </div>
-
         </div>
-<button
-  id="pushBtn"
-  class="main-btn"
-  type="button"
->
-  🔔 Включить уведомления
-</button>
 
-<div
-  id="pushStatus"
-  class="status"
-></div>
-        <button
-          id="logoutBtn"
-          class="logout"
-          type="button"
-        >
-          Выйти из аккаунта
-        </button>
-
+        <button id="logoutBtn" class="logout" type="button">Выйти из аккаунта</button>
       </div>
-
     </div>
-
   </div>
 
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
+    const SUPABASE_URL = 'https://pnsldiahjlnazouskkxk.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ';
 
-    const SUPABASE_URL =
-      'https://pnsldiahjlnazouskkxk.supabase.co';
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const $ = (id) => document.getElementById(id);
 
-    const SUPABASE_KEY =
-      'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ';
+    let pendingVerifyEmail = '';
 
-    const client =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
-
-    const $ = id =>
-      document.getElementById(id);
-
-
-    function status(el, text, type = '') {
-
+    function setStatus(el, text = '', type = '') {
+      if (!el) return;
       el.textContent = text;
-      el.className =
-        'status' + (type ? ' ' + type : '');
-
+      el.className = 'status' + (type ? ' ' + type : '');
     }
 
+    function showAuth() {
+      $('loadingView').style.display = 'none';
+      $('profileView').style.display = 'none';
+      $('authView').style.display = 'block';
+    }
 
-    /* =========================
-       ВКЛАДКИ
-    ========================= */
+    function showLoading() {
+      $('loadingView').style.display = 'block';
+      $('profileView').style.display = 'none';
+      $('authView').style.display = 'none';
+    }
 
-    $('loginTab').onclick = () => {
-
+    function switchToLogin() {
       $('loginTab').classList.add('active');
       $('registerTab').classList.remove('active');
-
       $('loginForm').classList.add('active');
       $('registerForm').classList.remove('active');
+      $('verifyForm').classList.remove('active');
+    }
 
-    };
-
-
-    $('registerTab').onclick = () => {
-
+    function switchToRegister() {
       $('registerTab').classList.add('active');
       $('loginTab').classList.remove('active');
-
       $('registerForm').classList.add('active');
       $('loginForm').classList.remove('active');
+      $('verifyForm').classList.remove('active');
+    }
 
-    };
+    $('loginTab').onclick = switchToLogin;
+    $('registerTab').onclick = switchToRegister;
 
+    async function showProfile() {
+      showLoading();
 
-    /* =========================
-       РЕГИСТРАЦИЯ
-    ========================= */
-let pendingVerifyEmail = '';
-    $('registerBtn').onclick =
-      async () => {
+      try {
+        const { data: userData, error: userError } = await client.auth.getUser();
 
-        const name =
-          $('registerName').value.trim();
+        if (userError) throw userError;
 
-        const email =
-          $('registerEmail').value.trim();
+        const user = userData?.user;
 
-        const password =
-          $('registerPassword').value;
-
-
-        if(!name || !email || !password){
-
-          status(
-            $('registerStatus'),
-            'Заполни все поля.',
-            'err'
-          );
-
+        if (!user) {
+          showAuth();
           return;
         }
 
-
-        if(password.length < 6){
-
-          status(
-            $('registerStatus'),
-            'Пароль должен содержать минимум 6 символов.',
-            'err'
-          );
-
-          return;
-        }
-
-
-        $('registerBtn').disabled = true;
-
-        status(
-          $('registerStatus'),
-          'Создаём аккаунт…'
-        );
-
-
-        const {
-          data,
-          error
-        } = await client.auth.signUp({
-
-          email,
-          password,
-
-          options: {
-            data: {
-              name
-            }
-          }
-
-        });
-
-
-        $('registerBtn').disabled = false;
-
-
-        if(error){
-
-  status(
-    $('registerStatus'),
-    'Не удалось зарегистрировать аккаунт. Возможно, этот email уже используется. Попробуйте войти в аккаунт.',
-    'err'
-  );
-
-  return;
-}
-
-
-        if(data.session){
-
-          await showProfile();
-
-        } else {
-pendingVerifyEmail = email;
-
-$('registerForm').classList.remove('active');
-$('verifyForm').classList.add('active');
-          status(
-            $('registerStatus'),
-            'Если этот email новый — мы отправили код подтверждения. Если аккаунт уже существует — войдите в него.',
-            'ok'
-          );
-
-        }
-
-      };
-
-
-$('verifyBtn').onclick = async () => {
-  const token = $('verifyCode').value.trim();
-
-  if (!pendingVerifyEmail || !token) {
-    status(
-      $('verifyStatus'),
-      'Введите код из письма.',
-      'err'
-    );
-    return;
-  }
-
-  $('verifyBtn').disabled = true;
-
-  const { error } = await client.auth.verifyOtp({
-    email: pendingVerifyEmail,
-    token,
-    type: 'signup'
-  });
-
-  $('verifyBtn').disabled = false;
-
-  if (error) {
-    status(
-      $('verifyStatus'),
-      'Неверный или просроченный код.',
-      'err'
-    );
-    return;
-  }
-
-  status(
-    $('verifyStatus'),
-    'Email подтверждён ✅',
-    'ok'
-  );
-
-  window.location.reload();
-};
-
-    /* =========================
-       ВХОД
-    ========================= */
-
-    $('loginBtn').onclick =
-      async () => {
-
-        const email =
-          $('loginEmail').value.trim();
-
-        const password =
-          $('loginPassword').value;
-
-
-        if(!email || !password){
-
-          status(
-            $('loginStatus'),
-            'Введи email и пароль.',
-            'err'
-          );
-
-          return;
-        }
-
-
-        $('loginBtn').disabled = true;
-
-        status(
-          $('loginStatus'),
-          'Входим…'
-        );
-
-
-        const {
-          error
-        } =
-          await client.auth.signInWithPassword({
-            email,
-            password
-          });
-
-
-        $('loginBtn').disabled = false;
-
-
-        if(error){
-
-          status(
-            $('loginStatus'),
-            'Неверный email или пароль.',
-            'err'
-          );
-
-          return;
-        }
-
-
-        await showProfile();
-
-      };
-
-
-    /* =========================
-       ЛИЧНЫЙ КАБИНЕТ
-    ========================= */
-
-    async function showProfile(){
-
-      let user = null;
-
-try {
-  const { data, error } =
-    await client.auth.getUser();
-
-  if (error) throw error;
-
-  user = data.user;
-} catch (error) {
-  console.error(error);
-
-  $('loadingView').style.display = 'none';
-  $('profileView').style.display = 'none';
-  $('authView').style.display = 'block';
-
-  return;
-}
-
-
-      if(!user){
-
-        $('loadingView').style.display =
-          'none';
-
-        $('profileView').style.display =
-          'none';
-
-        $('authView').style.display =
-          'block';
-
-        return;
-      }
-
-
-      const {
-        data: profile,
-        error
-      } =
-        await client
+        const { data: profile, error: profileError } = await client
           .from('profiles')
-          .select(
-            'name, bonus_balance, total_spent, member_level'
-          )
+          .select('name, bonus_balance, total_spent, member_level')
           .eq('id', user.id)
           .maybeSingle();
 
+        if (profileError) {
+          console.error('Profile error:', profileError);
+        }
 
-      $('loadingView').style.display =
-        'none';
+        const name = profile?.name || user.user_metadata?.name || 'Мой аккаунт';
+        const level = profile?.member_level || 'START';
 
-      $('authView').style.display =
-        'none';
+        $('profileName').textContent = name;
+        $('profileEmail').textContent = user.email || '';
+        $('bonusBalance').textContent =
+          Number(profile?.bonus_balance || 0).toLocaleString('ru-RU');
+        $('memberLevel').textContent = level + ' MEMBER';
+        $('profileLevel').textContent = level;
+        $('totalSpent').textContent =
+          Number(profile?.total_spent || 0).toLocaleString('ru-RU') + ' ₽';
 
-      $('profileView').style.display =
-        'block';
-
-
-      if(error){
-
-        console.error(error);
-
+        $('loadingView').style.display = 'none';
+        $('authView').style.display = 'none';
+        $('profileView').style.display = 'block';
+      } catch (error) {
+        console.error('Account load error:', error);
+        showAuth();
       }
-
-
-      const name =
-        profile?.name ||
-        user.user_metadata?.name ||
-        'Мой аккаунт';
-
-
-      const level =
-        profile?.member_level ||
-        'START';
-
-
-      $('profileName').textContent =
-        name;
-
-      $('profileEmail').textContent =
-        user.email || '';
-
-      $('bonusBalance').textContent =
-        Number(
-          profile?.bonus_balance || 0
-        ).toLocaleString('ru-RU');
-
-      $('memberLevel').textContent =
-        level + ' MEMBER';
-
-      $('profileLevel').textContent =
-        level;
-
-      $('totalSpent').textContent =
-        Number(
-          profile?.total_spent || 0
-        ).toLocaleString('ru-RU') + ' ₽';
-
     }
 
+    $('registerBtn').onclick = async () => {
+      const name = $('registerName').value.trim();
+      const email = $('registerEmail').value.trim();
+      const password = $('registerPassword').value;
 
-    /* =========================
-       ВЫХОД
-    ========================= */
+      if (!name || !email || !password) {
+        setStatus($('registerStatus'), 'Заполни все поля.', 'err');
+        return;
+      }
 
-    $('logoutBtn').onclick =
-      async () => {
+      if (password.length < 6) {
+        setStatus(
+          $('registerStatus'),
+          'Пароль должен содержать минимум 6 символов.',
+          'err'
+        );
+        return;
+      }
 
+      $('registerBtn').disabled = true;
+      setStatus($('registerStatus'), 'Создаём аккаунт…');
+
+      try {
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+          options: { data: { name } }
+        });
+
+        if (error) {
+          const message =
+            (error.message || '').toLowerCase().includes('already registered')
+              ? 'Не удалось зарегистрировать аккаунт. Возможно, этот email уже используется. Попробуйте войти в аккаунт.'
+              : 'Не удалось зарегистрировать аккаунт. Проверь данные и попробуй ещё раз.';
+
+          setStatus($('registerStatus'), message, 'err');
+          return;
+        }
+
+        if (data.session) {
+          await showProfile();
+          return;
+        }
+
+        pendingVerifyEmail = email;
+        $('registerForm').classList.remove('active');
+        $('verifyForm').classList.add('active');
+
+        setStatus(
+          $('verifyStatus'),
+          'Если этот email новый — код подтверждения отправлен. Если аккаунт уже существует — попробуйте войти.',
+          'ok'
+        );
+      } catch (error) {
+        console.error('Signup error:', error);
+        setStatus(
+          $('registerStatus'),
+          'Не удалось зарегистрироваться. Попробуйте ещё раз.',
+          'err'
+        );
+      } finally {
+        $('registerBtn').disabled = false;
+      }
+    };
+
+    $('verifyBtn').onclick = async () => {
+      const token = $('verifyCode').value.trim();
+
+      if (!pendingVerifyEmail || !token) {
+        setStatus($('verifyStatus'), 'Введите код из письма.', 'err');
+        return;
+      }
+
+      $('verifyBtn').disabled = true;
+      setStatus($('verifyStatus'), 'Проверяем код…');
+
+      try {
+        const { error } = await client.auth.verifyOtp({
+          email: pendingVerifyEmail,
+          token,
+          type: 'signup'
+        });
+
+        if (error) {
+          setStatus($('verifyStatus'), 'Неверный или просроченный код.', 'err');
+          return;
+        }
+
+        setStatus($('verifyStatus'), 'Email подтверждён ✅', 'ok');
+        window.location.reload();
+      } catch (error) {
+        console.error('Verify error:', error);
+        setStatus($('verifyStatus'), 'Не удалось проверить код.', 'err');
+      } finally {
+        $('verifyBtn').disabled = false;
+      }
+    };
+
+    $('loginBtn').onclick = async () => {
+      const email = $('loginEmail').value.trim();
+      const password = $('loginPassword').value;
+
+      if (!email || !password) {
+        setStatus($('loginStatus'), 'Введи email и пароль.', 'err');
+        return;
+      }
+
+      $('loginBtn').disabled = true;
+      setStatus($('loginStatus'), 'Входим…');
+
+      try {
+        const { error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) {
+          setStatus($('loginStatus'), 'Неверный email или пароль.', 'err');
+          return;
+        }
+
+        await showProfile();
+      } catch (error) {
+        console.error('Login error:', error);
+        setStatus($('loginStatus'), 'Не удалось войти. Попробуйте ещё раз.', 'err');
+      } finally {
+        $('loginBtn').disabled = false;
+      }
+    };
+
+    $('logoutBtn').onclick = async () => {
+      try {
         await client.auth.signOut();
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
 
-        $('profileView').style.display =
-          'none';
-
-        $('authView').style.display =
-          'block';
-
-      };
-
-      };
-
-    /* =========================
-       ПРОВЕРКА ПРИ ЗАГРУЗКЕ
-    ========================= */
+      switchToLogin();
+      showAuth();
+    };
 
     showProfile();
-
   </script>
-
 </body>
 </html>
