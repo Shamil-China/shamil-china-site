@@ -13,14 +13,42 @@
     <img src="logo.png" alt="SHAMIL | CHINA">
     <span>SHAMIL <i>| CHINA 🇨🇳</i></span>
   </a>
-  <nav>
-    <a href="#catalog">Каталог</a>
-    <a href="#about">Обо мне</a>
-    <a href="#how">Как заказать</a>
-  </nav>
+  <button class="menu-btn" onclick="openMenu()" aria-label="Открыть меню">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
   <div class="social-pills"><a class="instagram-pill" href="https://www.instagram.com/shamil.china_/" target="_blank" rel="noopener">Instagram ↗</a><a class="telegram-pill" href="https://t.me/Shamil_China05" target="_blank" rel="noopener">Telegram ↗</a></div>
 </header>
+<div class="side-menu" id="sideMenu">
+  <div class="menu-overlay" onclick="closeMenu()"></div>
 
+  <div class="menu-panel">
+    <div class="menu-top">
+      <b>SHAMIL | CHINA 🇨🇳</b>
+      <button class="menu-close" onclick="closeMenu()">✕</button>
+    </div>
+
+    <div class="menu-links">
+      <a href="/" onclick="closeMenu()">Главная</a>
+      <a href="/catalog">Каталог <span>→</span></a>
+      <a href="#about" onclick="closeMenu()">Обо мне <span>→</span></a>
+      <a href="#how" onclick="closeMenu()">Как заказать <span>→</span></a>
+    </div>
+
+    <div class="menu-socials">
+      <span>СВЯЗАТЬСЯ</span>
+
+      <a href="https://www.instagram.com/shamil.china_/" target="_blank">
+        Instagram ↗
+      </a>
+
+      <a href="https://t.me/Shamil_China05" target="_blank">
+        Telegram ↗
+      </a>
+    </div>
+  </div>
+</div>
 <main id="top">
   <section class="hero">
     <div class="hero-copy">
