@@ -1273,21 +1273,23 @@ async function loadClients(){
       </div>
 
 <div class="actions">
+
   <button
     class="btn"
     type="button"
-    onclick="changeClientBonus('${client.id}', Math.abs(Number(prompt('Сколько бонусов начислить?'))) || 0)"
+    onclick="changeClientBonus('${client.id}', 500)"
   >
-    + Начислить
+    +500
   </button>
 
   <button
     class="btn"
     type="button"
-    onclick="changeClientBonus('${client.id}', -(Math.abs(Number(prompt('Сколько бонусов списать?'))) || 0))"
+    onclick="changeClientBonus('${client.id}', -500)"
   >
-    − Списать
+    −500
   </button>
+
 </div>
 </div>
     </div>
