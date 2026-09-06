@@ -63,7 +63,16 @@
 
     <div class="menu-links">
       <a href="/">Главная</a>
-      <a href="/catalog" onclick="closeMenu()">Каталог <span>→</span></a>
+  <button class="menu-catalog-toggle" type="button" onclick="toggleCatalogMenu()">
+  <span>Каталог</span>
+  <span class="catalog-arrow">→</span>
+</button>
+
+<div class="menu-subcatalog" id="menuSubcatalog">
+  <a href="/catalog?section=clothes" onclick="closeMenu()">Одежда</a>
+  <a href="/catalog?section=shoes" onclick="closeMenu()">Обувь</a>
+  <a href="/catalog?section=accessories" onclick="closeMenu()">Аксессуары</a>
+</div>
       <a href="/#about">Обо мне <span>→</span></a>
       <a href="/#how">Как заказать <span>→</span></a>
     </div>
