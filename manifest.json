@@ -1,1 +1,18 @@
-
+{
+  "name": "SHAMIL | CHINA",
+  "short_name": "SHAMIL",
+  "description": "SHAMIL | CHINA — мужской стиль из Китая",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F7F3EB",
+  "theme_color": "#F7F3EB",
+  "icons": [
+    {
+      "src": "/app-icon.png.PNG",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
