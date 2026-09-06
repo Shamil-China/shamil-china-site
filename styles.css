@@ -285,3 +285,11 @@ footer{
   font-weight: 600;
   text-decoration: none;
 }
+.menu-panel {
+  background: #f5f1e9 !important;
+  opacity: 1 !important;
+}
+
+.menu-panel * {
+  opacity: 1;
+}
