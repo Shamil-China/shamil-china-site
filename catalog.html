@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Каталог — SHAMIL | CHINA</title>
+
+  <meta
+    name="description"
+    content="Каталог мужской одежды SHAMIL | CHINA. Актуальные позиции, реальные фото, размеры и заказ из Китая."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="SHAMIL | CHINA">
+    <span>SHAMIL <i>| CHINA 🇨🇳</i></span>
+  </a>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="#catalog">Каталог</a>
+    <a href="index.html#about">Обо мне</a>
+    <a href="index.html#how">Как заказать</a>
+  </nav>
+
+  <div class="social-pills">
+
+    <a
+      class="instagram-pill"
+      href="https://www.instagram.com/shamil.china_/"
+      target="_blank"
+      rel="noopener"
+    >
+      Instagram ↗
+    </a>
+
+    <a
+      class="telegram-pill"
+      href="https://t.me/Shamil_China05"
+      target="_blank"
+      rel="noopener"
+    >
+      Telegram ↗
+    </a>
+
+  </div>
+
+</header>
+
+
+<main id="top">
+
+  <section class="catalog" id="catalog">
+
+    <div class="section-head">
+
+      <div>
+        <span class="kicker">SHAMIL | CHINA</span>
+        <h2>Каталог</h2>
+      </div>
+
+      <div class="filters">
+
+        <button
+          class="filter active"
+          data-filter="all"
+        >
+          Все
+        </button>
+
+        <button
+          class="filter"
+          data-filter="lv"
+        >
+          Louis Vuitton
+        </button>
+
+        <button
+          class="filter"
+          data-filter="prada"
+        >
+          Prada
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="product-grid">
+
+      <!--
+      Эти товары остаются как резерв.
+      Когда Supabase работает,
+      script.js автоматически загрузит товары из админки.
+      -->
+
+
+      <article
+        class="product"
+        data-category="lv"
+      >
+
+        <button
+          class="gallery"
+          onclick="openProduct('lvset')"
+        >
+
+          <img
+            src="lv_black_1.jpg"
+            alt="Чёрный комплект"
+          >
+
+          <span class="tag">
+            SET
+          </span>
+
+        </button>
+
+        <div class="product-meta">
+
+          <div>
+
+            <h3>
+              Чёрный комплект
+            </h3>
+
+            <p>
+              Футболка + низ • фактурный узор
+            </p>
+
+          </div>
+
+          <button
+            class="smallbtn"
+            onclick="openProduct('lvset')"
+          >
+            Подробнее
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <article
+        class="product"
+        data-category="lv"
+      >
+
+        <button
+          class="gallery"
+          onclick="openProduct('lvbrown')"
+        >
+
+          <img
+            src="lv_brown_1.jpg"
+            alt="Коричневая футболка"
+          >
+
+          <span class="tag">
+            NEW
+          </span>
+
+        </button>
+
+        <div class="product-meta">
+
+          <div>
+
+            <h3>
+              Коричневая футболка
+            </h3>
+
+            <p>
+              Monogram sleeves • knit
+            </p>
+
+          </div>
+
+          <button
+            class="smallbtn"
+            onclick="openProduct('lvbrown')"
+          >
+            Подробнее
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <article
+        class="product"
+        data-category="prada"
+      >
+
+        <button
+          class="gallery"
+          onclick="openProduct('prada')"
+        >
+
+          <img
+            src="prada_1.jpg"
+            alt="Чёрный джемпер Prada"
+          >
+
+          <span class="tag">
+            KNIT
+          </span>
+
+        </button>
+
+        <div class="product-meta">
+
+          <div>
+
+            <h3>
+              Чёрный джемпер
+            </h3>
+
+            <p>
+              Минималистичный логотип • размер на фото 50
+            </p>
+
+          </div>
+
+          <button
+            class="smallbtn"
+            onclick="openProduct('prada')"
+          >
+            Подробнее
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <article
+        class="product"
+        data-category="lv"
+      >
+
+        <button
+          class="gallery"
+          onclick="openProduct('lvbasic')"
+        >
+
+          <img
+            src="lv_basic_white.jpg"
+            alt="Белая футболка LV"
+          >
+
+          <span class="tag">
+            2 COLORS
+          </span>
+
+        </button>
+
+        <div class="product-meta">
+
+          <div>
+
+            <h3>
+              Футболка с LV-эмблемой
+            </h3>
+
+            <p>
+              White / Navy • размер на фото L
+            </p>
+
+          </div>
+
+          <button
+            class="smallbtn"
+            onclick="openProduct('lvbasic')"
+          >
+            Подробнее
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <div class="note">
+
+      <div>
+
+        <b>
+          Не нашли нужную модель?
+        </b>
+
+        <span>
+          Пришлите фото — попробую найти в Китае.
+        </span>
+
+      </div>
+
+      <a
+        href="https://t.me/Shamil_China05"
+        target="_blank"
+      >
+        Написать в Telegram →
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <section class="disclaimer">
+
+    <p>
+      Примечание: брендированные товары,
+      не являющиеся оригинальными изделиями
+      правообладателя, должны быть явно
+      обозначены как реплики до оформления заказа.
+      Фотографии бирок и маркировки показывают
+      внешний вид товара и не являются
+      подтверждением подлинности.
+    </p>
+
+  </section>
+
+</main>
+
+
+
+<!-- КАРТОЧКА ТОВАРА — ОСТАВЛЯЕМ КАК ЕСТЬ -->
+
+<div
+  class="modal"
+  id="modal"
+>
+
+  <div
+    class="modal-backdrop"
+    onclick="closeModal()"
+  ></div>
+
+
+  <div class="modal-card">
+
+    <button
+      class="close"
+      onclick="closeModal()"
+    >
+      ✕
+    </button>
+
+
+    <div class="modal-grid">
+
+
+      <div class="modal-gallery">
+
+        <img
+          id="mainImage"
+          src=""
+          alt=""
+        >
+
+        <div
+          id="thumbs"
+          class="thumbs"
+        ></div>
+
+      </div>
+
+
+      <div class="modal-info">
+
+        <span
+          class="kicker"
+          id="modalBrand"
+        ></span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalDesc"></p>
+
+        <div
+          id="variants"
+          class="variants"
+        ></div>
+
+
+        <div class="price-line">
+
+          <span>
+            Цена
+          </span>
+
+          <b>
+            уточняйте
+          </b>
+
+        </div>
+
+
+        <a
+          class="btn red full"
+          href="https://www.instagram.com/shamil.china_/"
+          target="_blank"
+        >
+          Купить в Instagram ↗
+        </a>
+
+
+        <a
+          class="btn full telegram-btn"
+          href="https://t.me/Shamil_China05"
+          target="_blank"
+        >
+          Купить в Telegram ↗
+        </a>
+
+
+        <p class="micro">
+          Дополнительные фото/видео — по запросу.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<footer>
+
+  <b>
+    SHAMIL | CHINA 🇨🇳
+  </b>
+
+  <div class="footer-links">
+
+    <a
+      href="https://www.instagram.com/shamil.china_/"
+      target="_blank"
+      rel="noopener"
+    >
+      Instagram
+    </a>
+
+    <a
+      href="https://t.me/Shamil_China05"
+      target="_blank"
+      rel="noopener"
+    >
+      Telegram
+    </a>
+
+    <span>
+      Guangzhou • 2026
+    </span>
+
+  </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
