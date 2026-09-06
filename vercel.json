@@ -3,6 +3,8 @@
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/admin/", "destination": "/admin.html" },
     { "source": "/catalog", "destination": "/catalog.html" },
-    { "source": "/catalog/", "destination": "/catalog.html" }
+    { "source": "/catalog/", "destination": "/catalog.html" },
+    { "source": "/account", "destination": "/account.html" },
+    { "source": "/account/", "destination": "/account.html" }
   ]
 }
