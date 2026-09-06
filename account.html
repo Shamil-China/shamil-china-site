@@ -609,14 +609,14 @@ let pendingVerifyEmail = '';
 
         if(error){
 
-          status(
-            $('registerStatus'),
-            error.message,
-            'err'
-          );
+  status(
+    $('registerStatus'),
+    'Не удалось зарегистрировать аккаунт. Возможно, этот email уже используется. Попробуйте войти в аккаунт.',
+    'err'
+  );
 
-          return;
-        }
+  return;
+}
 if (
   data.user &&
   Array.isArray(data.user.identities) &&
