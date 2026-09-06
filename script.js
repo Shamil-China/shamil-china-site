@@ -251,3 +251,10 @@ function closeMenu() {
   document.getElementById('sideMenu')?.classList.remove('open');
   document.body.style.overflow = '';
 }
+function toggleCatalogMenu(){
+  const sub = document.getElementById('menuSubcatalog');
+  const btn = document.querySelector('.menu-catalog-toggle');
+
+  sub?.classList.toggle('open');
+  btn?.classList.toggle('open');
+}
