@@ -617,19 +617,7 @@ let pendingVerifyEmail = '';
 
   return;
 }
-if (
-  data.user &&
-  Array.isArray(data.user.identities) &&
-  data.user.identities.length === 0
-) {
-  status(
-    $('registerStatus'),
-    'Этот email уже зарегистрирован. Войди в аккаунт.',
-    'err'
-  );
 
-  return;
-}
 
         if(data.session){
 
@@ -642,7 +630,7 @@ $('registerForm').classList.remove('active');
 $('verifyForm').classList.add('active');
           status(
             $('registerStatus'),
-            'Аккаунт создан ✅ Проверь email и подтверди регистрацию.',
+            ''Если этот email новый — мы отправили код подтверждения. Если аккаунт уже существует — войдите в него.'',
             'ok'
           );
 
