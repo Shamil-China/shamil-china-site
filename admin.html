@@ -37,7 +37,32 @@
     <section class="card">
       <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><div class="muted">Управление каталогом</div><h1 style="margin-bottom:0">Товары</h1></div><button id="logoutBtn" class="btn ghost" type="button">Выйти</button></div>
     </section>
+<section class="card">
+  <div class="muted">Главная страница</div>
+  <h2>Фото на главной</h2>
 
+  <img
+    id="heroPreview"
+    src=""
+    alt="Фото на главной"
+    style="width:100%;max-width:340px;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:none;margin-bottom:14px;"
+  >
+
+  <label for="heroPhoto">Новое фото</label>
+  <input id="heroPhoto" type="file" accept="image/*">
+
+  <div class="photo-note">
+    Выбери фотографию с телефона. После сохранения она появится на главной странице.
+  </div>
+
+  <div class="actions">
+    <button id="saveHeroBtn" class="btn red" type="button">
+      Сохранить фото
+    </button>
+  </div>
+
+  <div id="heroStatus" class="status"></div>
+</section>
     <section class="card">
       <h2 id="formTitle">Добавить товар</h2>
       <form id="productForm">
