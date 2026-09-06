@@ -398,16 +398,3 @@ right: 8px;
 .app-splash > img {
   display: none;
 }
-html {
-  background: #F7F3EB;
-}
-
-body {
-  background: #F7F3EB;
-  padding-top: env(safe-area-inset-top);
-}
-
-.app-splash {
-  padding-top: env(safe-area-inset-top);
-}
-
