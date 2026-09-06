@@ -322,7 +322,7 @@
     const SUPABASE_URL = 'https://pnsldiahjlnazouskkxk.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ';
 
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const client = window.client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     const $ = (id) => document.getElementById(id);
 
     let pendingVerifyEmail = '';
