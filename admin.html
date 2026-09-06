@@ -109,7 +109,10 @@ async function ensureAdmin(){
   const {data:{session}}=await sb.auth.getSession();
   if(!session){showLogin();return false}
   if(session.user.id!==ADMIN_UID){await sb.auth.signOut();showLogin();setStatus($('loginStatus'),'У этого аккаунта нет доступа к админке.','err');return false}
-  showDashboard();await loadProducts();return true;
+  showDashboard();
+await loadProducts();
+await loadHero();
+return true;
 }
 function showLogin(){$('loginCard').classList.remove('hidden');$('dashboard').classList.add('hidden')}
 function showDashboard(){$('loginCard').classList.add('hidden');$('dashboard').classList.remove('hidden')}
@@ -259,7 +262,6 @@ $('saveHeroBtn').addEventListener('click',async()=>{
   }
 });
 ensureAdmin();
-showDashboard();
-await loadProducts();
-await loadHero();
-return true;
+</script>
+</body>
+</html>
