@@ -398,3 +398,15 @@ right: 8px;
 .app-splash > img {
   display: none;
 }
+/* В обычном браузере заставку не показываем */
+.app-splash {
+  display: none;
+}
+
+/* Показываем только установленное приложение */
+@media (display-mode: standalone) {
+  .app-splash {
+    display: flex;
+  }
+}
+
