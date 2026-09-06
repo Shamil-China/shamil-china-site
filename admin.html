@@ -1106,7 +1106,115 @@ $('saveHeroBtn').addEventListener(
 );
 
 
+/* =========================
+   БРЕНДЫ
+========================= */
 
+async function loadBrands(){
+
+  const { data, error } = await sb
+    .from('brands')
+    .select('*')
+    .order('name');
+
+  if(error){
+    setStatus(
+      $('brandStatus'),
+      'Ошибка загрузки брендов: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  $('brandsList').innerHTML = (data || []).map(brand => `
+    <div class="item">
+      <div>
+        <h3>${esc(brand.name)}</h3>
+      </div>
+
+      <div class="item-actions">
+        <button
+          class="mini danger"
+          type="button"
+          onclick="deleteBrand(${brand.id})"
+        >
+          Удалить
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+
+$('addBrandBtn').addEventListener('click', async () => {
+
+  const name = $('newBrandName').value.trim();
+
+  if(!name){
+    setStatus(
+      $('brandStatus'),
+      'Введи название бренда.',
+      'err'
+    );
+    return;
+  }
+
+  const slug = name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+  const { error } = await sb
+    .from('brands')
+    .insert({
+      name,
+      slug: slug || ('brand-' + Date.now())
+    });
+
+  if(error){
+    setStatus(
+      $('brandStatus'),
+      'Ошибка: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  $('newBrandName').value = '';
+
+  setStatus(
+    $('brandStatus'),
+    'Бренд добавлен ✅',
+    'ok'
+  );
+
+  await loadBrands();
+});
+
+
+async function deleteBrand(id){
+
+  if(!confirm('Удалить этот бренд?')){
+    return;
+  }
+
+  const { error } = await sb
+    .from('brands')
+    .delete()
+    .eq('id', id);
+
+  if(error){
+    setStatus(
+      $('brandStatus'),
+      'Ошибка: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  await loadBrands();
+}
 /* =========================
    ЗАГРУЗКА ТОВАРОВ
 ========================= */
