@@ -187,7 +187,21 @@ async function deleteProduct(id){
   if(error){alert('Не получилось удалить: '+error.message);return}
   await loadProducts();
 }
+async function deleteProduct(id){
+  // старый код
+}
 
+/* СЮДА ВСТАВЛЯЕМ НОВЫЙ КОД */
+
+async function loadHero(){
+  ...
+}
+
+$('saveHeroBtn').addEventListener('click', async()=>{
+  ...
+});
+
+ensureAdmin();
 ensureAdmin();
 </script>
 </body>
