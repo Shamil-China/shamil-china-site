@@ -1297,33 +1297,51 @@ async function loadClients(){
 }
 
 
-async function changeClientBonus(userId, amount){
+async function changeClientBonus(userId, amount) {
 
-  const action =
-    amount > 0
-      ? `Начислить ${amount} бонусов?`
-      : `Списать ${Math.abs(amount)} бонусов?`;
+  const isAdd = amount > 0;
 
-  if(!confirm(action)){
+  const raw = prompt(
+    isAdd
+      ? 'Сколько бонусов начислить?'
+      : 'Сколько бонусов списать?'
+  );
+
+  if (raw === null) return;
+
+  const value = Math.floor(Number(raw));
+
+  if (!Number.isFinite(value) || value <= 0) {
+    setStatus(
+      $('clientsStatus'),
+      'Введите правильную сумму.',
+      'err'
+    );
     return;
   }
+
+  const finalAmount = isAdd ? value : -value;
+
+  const action = isAdd
+    ? `Начислить ${value} бонусов?`
+    : `Списать ${value} бонусов?`;
+
+  if (!confirm(action)) return;
 
   const { data, error } = await sb.rpc(
     'admin_change_bonus',
     {
       target_user_id: userId,
-      amount: amount
+      amount: finalAmount
     }
   );
 
-  if(error){
-
+  if (error) {
     setStatus(
       $('clientsStatus'),
       'Ошибка: ' + error.message,
       'err'
     );
-
     return;
   }
 
