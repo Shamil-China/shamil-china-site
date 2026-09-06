@@ -186,22 +186,76 @@ async function deleteProduct(id){
   const {error}=await sb.from('products').delete().eq('id',id);
   if(error){alert('Не получилось удалить: '+error.message);return}
   await loadProducts();
-}
-async function deleteProduct(id){
-  // старый код
+}async function loadHero(){
+  const {data,error}=await sb
+    .from('site_settings')
+    .select('hero_image_url')
+    .eq('id','home')
+    .maybeSingle();
+
+  if(error){
+    setStatus($('heroStatus'),'Не удалось загрузить фото: '+error.message,'err');
+    return;
+  }
+
+  if(data?.hero_image_url){
+    $('heroPreview').src=data.hero_image_url;
+    $('heroPreview').style.display='block';
+  }
 }
 
-/* СЮДА ВСТАВЛЯЕМ НОВЫЙ КОД */
+$('saveHeroBtn').addEventListener('click',async()=>{
+  const file=$('heroPhoto').files[0];
 
-async function loadHero(){
-  ...
-}
+  if(!file){
+    setStatus($('heroStatus'),'Сначала выбери фотографию.','err');
+    return;
+  }
 
-$('saveHeroBtn').addEventListener('click', async()=>{
-  ...
+  const {data:{user}}=await sb.auth.getUser();
+
+  if(!user || user.id!==ADMIN_UID){
+    setStatus($('heroStatus'),'Сессия закончилась. Войди заново.','err');
+    return;
+  }
+
+  $('saveHeroBtn').disabled=true;
+  setStatus($('heroStatus'),'Загружаем фото…');
+
+  try{
+    const urls=await uploadPhotos([file],user.id);
+    const hero_image_url=urls[0];
+
+    const {error}=await sb
+      .from('site_settings')
+      .upsert({
+        id:'home',
+        hero_image_url,
+        updated_at:new Date().toISOString()
+      });
+
+    if(error) throw error;
+
+    $('heroPreview').src=hero_image_url;
+    $('heroPreview').style.display='block';
+    $('heroPhoto').value='';
+
+    setStatus(
+      $('heroStatus'),
+      'Готово ✅ Фото на главной обновлено.',
+      'ok'
+    );
+
+  }catch(err){
+    setStatus(
+      $('heroStatus'),
+      'Ошибка: '+(err.message||err),
+      'err'
+    );
+  }finally{
+    $('saveHeroBtn').disabled=false;
+  }
 });
-
-ensureAdmin();
 ensureAdmin();
 </script>
 </body>
