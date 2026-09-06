@@ -174,7 +174,8 @@ footer{
   width: 44px;
   height: 44px;
   padding: 0;
-  transform: translateX (25px);
+  position: absolute;
+right: 8px;
   border: 0;
   background: transparent;
   cursor: pointer;
