@@ -1272,20 +1272,11 @@ async function loadClients(){
         <b>${Number(client.bonus_balance || 0).toLocaleString('ru-RU')}</b>
       </div>
 
-  <div class="actions">
-  <input
-    id="bonus-${client.id}"
-    type="number"
-    min="1"
-    step="1"
-    placeholder="Сумма"
-    style="max-width:140px"
-  >
-
+<div class="actions">
   <button
     class="btn"
     type="button"
-    onclick="changeClientBonus('${client.id}', Math.abs(Number(document.getElementById('bonus-${client.id}').value)))"
+    onclick="changeClientBonus('${client.id}', Math.abs(Number(prompt('Сколько бонусов начислить?'))) || 0)"
   >
     + Начислить
   </button>
@@ -1293,10 +1284,11 @@ async function loadClients(){
   <button
     class="btn"
     type="button"
-    onclick="changeClientBonus('${client.id}', -Math.abs(Number(document.getElementById('bonus-${client.id}').value)))"
+    onclick="changeClientBonus('${client.id}', -(Math.abs(Number(prompt('Сколько бонусов списать?'))) || 0))"
   >
     − Списать
   </button>
+</div>
 </div>
     </div>
 
