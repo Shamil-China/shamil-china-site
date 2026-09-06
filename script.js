@@ -259,75 +259,63 @@ function toggleCatalogMenu(){
   sub?.classList.toggle('open');
   btn?.classList.toggle('open');
 }
-async function loadCatalogBrands(){
-
+async function loadCatalogBrands() {
   const filters = document.getElementById('brandFilters');
 
-  if(!filters){
-    return;
-  }
+  if (!filters) return;
 
-  const { data, error } = await sb
-    .from('brands')
-    .select('name, slug')
-    .order('name');
+  try {
+    const response = await fetch(
+      'https://pnsldiahjlnazouskkxk.supabase.co/rest/v1/brands?select=name,slug&order=name.asc',
+      {
+        headers: {
+          apikey: 'sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ',
+          Authorization: 'Bearer sb_publishable_b212Q_Wc9-7C97UlreEj8A_O3JEcoJQ'
+        }
+      }
+    );
 
-  if(error){
-    return;
-  }
+    const brands = await response.json();
 
-  filters.innerHTML = `
-    <button
-      class="filter active"
-      data-filter="all"
-    >
-      Все
-    </button>
-  ` + (data || []).map(brand => `
-    <button
-      class="filter"
-      data-filter="${brand.slug}"
-      data-brand-name="${brand.name}"
-    >
-      ${brand.name}
-    </button>
-  `).join('');
+    filters.innerHTML = `
+      <button class="filter active" data-brand="">
+        Все
+      </button>
+      ${brands.map(brand => `
+        <button
+          class="filter"
+          data-brand="${escapeHtml(brand.name)}"
+        >
+          ${escapeHtml(brand.name)}
+        </button>
+      `).join('')}
+    `;
 
-  filters
-    .querySelectorAll('.filter')
-    .forEach(button => {
-
+    filters.querySelectorAll('.filter').forEach(button => {
       button.addEventListener('click', () => {
 
-        filters
-          .querySelectorAll('.filter')
-          .forEach(btn =>
-            btn.classList.remove('active')
-          );
+        filters.querySelectorAll('.filter').forEach(btn => {
+          btn.classList.remove('active');
+        });
 
         button.classList.add('active');
 
-        const brandName =
-          button.dataset.brandName || 'all';
+        const selectedBrand = button.dataset.brand || '';
 
-        document
-          .querySelectorAll('.product-card')
-          .forEach(card => {
+        document.querySelectorAll('.product').forEach(card => {
+          const cardBrand = card.dataset.brand || '';
 
-            const cardBrand =
-              card.dataset.brand || '';
-
-            card.style.display =
-              brandName === 'all' ||
-              cardBrand === brandName
-                ? ''
-                : 'none';
-
-          });
-
+          card.style.display =
+            !selectedBrand || cardBrand === selectedBrand
+              ? ''
+              : 'none';
+        });
       });
-
     });
+
+  } catch (error) {
+    console.error('Ошибка загрузки брендов:', error);
+  }
 }
 
 loadCatalogBrands();
