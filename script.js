@@ -242,3 +242,12 @@ document.addEventListener('keydown', e => {
 });
 
 loadProductsFromSupabase();
+function openMenu() {
+  document.getElementById('sideMenu')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  document.getElementById('sideMenu')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
