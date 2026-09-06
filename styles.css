@@ -158,3 +158,13 @@ footer{
   .instagram-pill{display:none}
   .telegram-pill{display:none}
 }
+.telegram-btn {
+  background: #229ED9;
+  color: #fff;
+  border-color: #229ED9;
+}
+
+.telegram-btn:hover {
+  background: #1d8fc5;
+  border-color: #1d8fc5;
+}
