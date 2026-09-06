@@ -171,17 +171,17 @@ footer{
 /* SHAMIL CHINA — BURGER MENU */
 
 .menu-btn {
-  width: 44px;
-  height: 44px;
+  width: 44 px;
+  height: 44 px;
   padding: 0;
-  transform: translateX(12px);
+  transform: translateX (30 px);
   border: 0;
   background: transparent;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 6 px;
 }
 
 .menu-btn span {
