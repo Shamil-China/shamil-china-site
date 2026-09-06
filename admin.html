@@ -866,6 +866,7 @@ async function ensureAdmin(){
   await loadProducts();
 
   await loadHero();
+  await loadHeroSlider();
   await loadBrands();
 
   return true;
@@ -1136,7 +1137,129 @@ $('saveHeroBtn').addEventListener(
 
   }
 );
+/* =========================
+   СЛАЙДЕР НА ГЛАВНОЙ
+========================= */
 
+async function loadHeroSlider(){
+
+  const { data, error } = await sb
+    .from('site_settings')
+    .select('hero_images')
+    .eq('id','home')
+    .maybeSingle();
+
+  if(error){
+    setStatus(
+      $('heroSliderStatus'),
+      'Не удалось загрузить слайдер: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  const images =
+    Array.isArray(data?.hero_images)
+      ? data.hero_images
+      : [];
+
+  $('heroSliderPreview').innerHTML =
+    images.map(url => `
+      <img
+        src="${esc(url)}"
+        alt=""
+      >
+    `).join('');
+}
+
+
+$('saveHeroSliderBtn').addEventListener('click', async () => {
+
+  const files =
+    [...$('heroSliderPhotos').files];
+
+  if(!files.length){
+    setStatus(
+      $('heroSliderStatus'),
+      'Сначала выбери фотографии.',
+      'err'
+    );
+    return;
+  }
+
+  const { data:{user} } =
+    await sb.auth.getUser();
+
+  if(!user || user.id !== ADMIN_UID){
+    setStatus(
+      $('heroSliderStatus'),
+      'Сессия закончилась. Войди заново.',
+      'err'
+    );
+    return;
+  }
+
+  $('saveHeroSliderBtn').disabled = true;
+
+  setStatus(
+    $('heroSliderStatus'),
+    'Загружаем фотографии…'
+  );
+
+  try{
+
+    const urls =
+      await uploadPhotos(
+        files,
+        user.id
+      );
+
+    const { error } = await sb
+      .from('site_settings')
+      .update({
+        hero_images: urls,
+        updated_at:
+          new Date().toISOString()
+      })
+      .eq('id','home');
+
+    if(error){
+      throw error;
+    }
+
+    $('heroSliderPreview').innerHTML =
+      urls.map(url => `
+        <img
+          src="${esc(url)}"
+          alt=""
+        >
+      `).join('');
+
+    $('heroSliderPhotos').value = '';
+
+    setStatus(
+      $('heroSliderStatus'),
+      'Готово ✅ Слайдер сохранён.',
+      'ok'
+    );
+
+  }
+  catch(error){
+
+    setStatus(
+      $('heroSliderStatus'),
+      'Ошибка: ' + (error.message || error),
+      'err'
+    );
+
+  }
+  finally{
+
+    $('saveHeroSliderBtn').disabled = false;
+
+  }
+
+});
 
 /* =========================
    БРЕНДЫ
