@@ -835,6 +835,7 @@ async function ensureAdmin(){
   await loadProducts();
 
   await loadHero();
+  await loadBrands();
 
   return true;
 
@@ -926,7 +927,7 @@ $('loginForm').addEventListener(
     await loadProducts();
 
     await loadHero();
-
+await loadBrands();
   }
 );
 
