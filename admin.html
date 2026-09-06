@@ -1125,22 +1125,6 @@ async function loadBrands(){
     );
     return;
   }
-async function loadBrands(){
-
-  const { data, error } = await sb
-    .from('brands')
-    .select('*')
-    .order('name');
-
-  if(error){
-    setStatus(
-      $('brandStatus'),
-      'Ошибка загрузки брендов: ' + error.message,
-      'err'
-    );
-    return;
-  }
-
   const brandSelect = $('brand');
 
   if(brandSelect){
