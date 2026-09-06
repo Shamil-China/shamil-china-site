@@ -370,7 +370,30 @@
           ></div>
 
         </div>
+<div id="verifyForm" class="form">
+  <label>Код из письма</label>
 
+  <input
+    id="verifyCode"
+    type="text"
+    inputmode="numeric"
+    autocomplete="one-time-code"
+    placeholder="Введите код"
+  >
+
+  <button
+    id="verifyBtn"
+    class="main-btn"
+    type="button"
+  >
+    Подтвердить email
+  </button>
+
+  <div
+    id="verifyStatus"
+    class="status"
+  ></div>
+</div>
       </div>
 
 
@@ -518,7 +541,7 @@
     /* =========================
        РЕГИСТРАЦИЯ
     ========================= */
-
+let pendingVerifyEmail = '';
     $('registerBtn').onclick =
       async () => {
 
@@ -601,7 +624,10 @@
           await showProfile();
 
         } else {
+pendingVerifyEmail = email;
 
+$('registerForm').classList.remove('active');
+$('verifyForm').classList.add('active');
           status(
             $('registerStatus'),
             'Аккаунт создан ✅ Проверь email и подтверди регистрацию.',
@@ -612,6 +638,46 @@
 
       };
 
+
+$('verifyBtn').onclick = async () => {
+  const token = $('verifyCode').value.trim();
+
+  if (!pendingVerifyEmail || !token) {
+    status(
+      $('verifyStatus'),
+      'Введите код из письма.',
+      'err'
+    );
+    return;
+  }
+
+  $('verifyBtn').disabled = true;
+
+  const { error } = await client.auth.verifyOtp({
+    email: pendingVerifyEmail,
+    token,
+    type: 'signup'
+  });
+
+  $('verifyBtn').disabled = false;
+
+  if (error) {
+    status(
+      $('verifyStatus'),
+      'Неверный или просроченный код.',
+      'err'
+    );
+    return;
+  }
+
+  status(
+    $('verifyStatus'),
+    'Email подтверждён ✅',
+    'ok'
+  );
+
+  await loadAccount();
+};
 
     /* =========================
        ВХОД
