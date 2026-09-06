@@ -617,7 +617,19 @@ let pendingVerifyEmail = '';
 
           return;
         }
+if (
+  data.user &&
+  Array.isArray(data.user.identities) &&
+  data.user.identities.length === 0
+) {
+  status(
+    $('registerStatus'),
+    'Этот email уже зарегистрирован. Войди в аккаунт.',
+    'err'
+  );
 
+  return;
+}
 
         if(data.session){
 
