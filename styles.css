@@ -293,3 +293,44 @@ footer{
 .menu-panel * {
   opacity: 1;
 }
+.menu-catalog-toggle{
+  width:100%;
+  border:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  padding:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font:inherit;
+  font-size:clamp(24px,5vw,34px);
+  font-weight:800;
+  color:var(--text);
+  cursor:pointer;
+}
+
+.menu-subcatalog{
+  display:none;
+  padding:0 0 8px;
+}
+
+.menu-subcatalog.open{
+  display:block;
+}
+
+.menu-subcatalog a{
+  display:block;
+  padding:16px 18px;
+  font-size:20px;
+  font-weight:650;
+  border-bottom:1px solid var(--line);
+}
+
+.catalog-arrow{
+  transition:transform .25s ease;
+}
+
+.menu-catalog-toggle.open .catalog-arrow{
+  transform:rotate(90deg);
+}
