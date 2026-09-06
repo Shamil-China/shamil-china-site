@@ -1025,16 +1025,3 @@ async function startStore() {
 
 
 startStore();
-html {
-  background: #F7F3EB;
-}
-
-body {
-  background: #F7F3EB;
-  padding-top: env(safe-area-inset-top);
-}
-
-.app-splash {
-  padding-top: env(safe-area-inset-top);
-}
-
