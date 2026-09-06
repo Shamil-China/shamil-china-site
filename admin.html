@@ -119,8 +119,10 @@ $('loginForm').addEventListener('submit',async e=>{
   const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
   if(error){setStatus($('loginStatus'),'Не получилось войти: '+error.message,'err');return}
   if(data.user.id!==ADMIN_UID){await sb.auth.signOut();setStatus($('loginStatus'),'У этого аккаунта нет доступа к админке.','err');return}
-  setStatus($('loginStatus'),'');showDashboard();await loadProducts();
-});
+  setStatus($('loginStatus'),'');
+showDashboard();
+await loadProducts();
+await loadHero();
 $('logoutBtn').addEventListener('click',async()=>{await sb.auth.signOut();showLogin()});
 
 async function loadProducts(){
@@ -257,6 +259,7 @@ $('saveHeroBtn').addEventListener('click',async()=>{
   }
 });
 ensureAdmin();
-</script>
-</body>
-</html>
+showDashboard();
+await loadProducts();
+await loadHero();
+return true;
