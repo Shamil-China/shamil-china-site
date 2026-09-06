@@ -1243,8 +1243,8 @@ function editProduct(id){
     product.brand || '';
 
 
-  $('category').value =
-    product.category || 'other';
+  $('section').value =
+    product.section || 'clothes';
 
 
   $('price').value =
@@ -1507,7 +1507,8 @@ $('productForm').addEventListener(
 
         brand:
           $('brand').value.trim() || null,
-
+section:
+  $('section').value,
         category:
           $('category').value,
 
