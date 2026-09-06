@@ -759,10 +759,24 @@ $('verifyBtn').onclick = async () => {
 
     async function showProfile(){
 
-      const {
-        data: { user }
-      } =
-        await client.auth.getUser();
+      let user = null;
+
+try {
+  const { data, error } =
+    await client.auth.getUser();
+
+  if (error) throw error;
+
+  user = data.user;
+} catch (error) {
+  console.error(error);
+
+  $('loadingView').style.display = 'none';
+  $('profileView').style.display = 'none';
+  $('authView').style.display = 'block';
+
+  return;
+}
 
 
       if(!user){
