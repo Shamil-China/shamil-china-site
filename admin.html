@@ -929,6 +929,7 @@ $('loginForm').addEventListener(
 
     await loadHero();
 await loadBrands();
+    await loadClients();
   }
 );
 
@@ -1352,6 +1353,115 @@ async function deleteBrand(id){
 
   await loadBrands();
 }
+
+  /* =========================
+   КЛИЕНТЫ / БОНУСЫ
+========================= */
+
+async function loadClients(){
+
+  const { data, error } = await sb.rpc('admin_list_clients');
+
+  if(error){
+    setStatus(
+      $('clientsStatus'),
+      'Ошибка загрузки клиентов: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  const clients = data || [];
+
+  if(!clients.length){
+    $('clientsList').innerHTML =
+      '<div class="muted">Пока нет клиентов.</div>';
+    return;
+  }
+
+  $('clientsList').innerHTML = clients.map(client => `
+
+    <div class="product" style="margin-bottom:14px">
+
+      <div style="font-weight:700; font-size:16px; margin-bottom:6px">
+        ${esc(client.name || 'Без имени')}
+      </div>
+
+      <div class="muted" style="margin-bottom:8px">
+        ${esc(client.email || '')}
+      </div>
+
+      <div style="margin-bottom:10px">
+        Бонусы:
+        <b>${Number(client.bonus_balance || 0).toLocaleString('ru-RU')}</b>
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="btn"
+          type="button"
+          onclick="changeClientBonus('${client.id}', 500)"
+        >
+          +500
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          onclick="changeClientBonus('${client.id}', -500)"
+        >
+          −500
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join('');
+
+}
+
+
+async function changeClientBonus(userId, amount){
+
+  const action =
+    amount > 0
+      ? `Начислить ${amount} бонусов?`
+      : `Списать ${Math.abs(amount)} бонусов?`;
+
+  if(!confirm(action)){
+    return;
+  }
+
+  const { data, error } = await sb.rpc(
+    'admin_change_bonus',
+    {
+      target_user_id: userId,
+      amount: amount
+    }
+  );
+
+  if(error){
+
+    setStatus(
+      $('clientsStatus'),
+      'Ошибка: ' + error.message,
+      'err'
+    );
+
+    return;
+  }
+
+  setStatus(
+    $('clientsStatus'),
+    `Готово ✅ Новый баланс: ${Number(data).toLocaleString('ru-RU')}`,
+    'ok'
+  );
+
+  await loadClients();
+}
+  
 /* =========================
    ЗАГРУЗКА ТОВАРОВ
 ========================= */
