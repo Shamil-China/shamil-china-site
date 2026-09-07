@@ -417,3 +417,20 @@ right: 8px;
   opacity: .35;
 } 
 
+.image-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.image-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .20);
+}
+
+.image-dots span.active {
+  background: #111;
+}
