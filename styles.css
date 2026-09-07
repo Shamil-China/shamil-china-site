@@ -1576,3 +1576,52 @@ footer a{
     padding-right:18px !important;
   }
 }
+/* ===== LUXURY TELEGRAM CTA ===== */
+
+.cta{
+  margin:24px 18px 42px !important;
+  padding:30px 24px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #24190f 0%,
+      #110d09 100%
+    ) !important;
+
+  border:1px solid rgba(201,161,94,.35) !important;
+  border-radius:22px !important;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.30),
+    inset 0 1px rgba(255,255,255,.04) !important;
+}
+
+.cta .kicker{
+  color:#c9a15e !important;
+  letter-spacing:.20em !important;
+}
+
+.cta h2{
+  color:#f3eadc !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-weight:500 !important;
+  line-height:1.08 !important;
+}
+
+.cta .btn.white{
+  background:linear-gradient(
+    135deg,
+    #d8b36d 0%,
+    #efd59d 48%,
+    #c99c50 100%
+  ) !important;
+
+  color:#24170d !important;
+  border:0 !important;
+  border-radius:14px !important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.40),
+    0 10px 24px rgba(0,0,0,.24) !important;
+}
