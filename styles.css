@@ -408,5 +408,12 @@ right: 8px;
   .app-splash {
     display: flex;
   }
+
+ #mainImage {
+  transition: opacity .22s ease;
 }
+
+#mainImage.fade-image {
+  opacity: .35;
+} 
 
