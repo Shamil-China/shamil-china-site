@@ -1436,6 +1436,7 @@ body{
   ) !important;
 
   color:#24170d !important;
+
   border:1px solid rgba(201,161,94,.45) !important;
 }
 
@@ -1453,5 +1454,41 @@ footer a{
   .hero-visual{
     min-height:270px !important;
     height:270px !important;
+  }
+}/* ===== LUXURY HERO TRUST ===== */
+
+@media(max-width:560px){
+
+  .hero .trust{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:0 !important;
+    margin-top:28px !important;
+
+    border-top:1px solid rgba(201,161,94,.22);
+    border-bottom:1px solid rgba(201,161,94,.22);
+  }
+
+  .hero .trust span{
+    position:relative;
+    padding:17px 12px 17px 18px !important;
+
+    color:#cbbda9 !important;
+    font-size:13px !important;
+    line-height:1.35 !important;
+
+    border-bottom:1px solid rgba(201,161,94,.12);
+  }
+
+  .hero .trust span::before{
+    content:"";
+    position:absolute;
+    left:2px;
+    top:23px;
+
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#c9a15e;
   }
 }
