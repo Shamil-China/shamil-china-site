@@ -1255,47 +1255,49 @@ body{
     backdrop-filter:blur(12px);
   }
 }
-/* ===== LUXURY CATALOG BUTTON ===== */
+/* ===== CATALOG GOLD BUTTONS — FINAL ===== */
 
-.lux-catalog-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:34px;
-  margin-top:22px;
-  padding:17px 22px;
-  min-width:260px;
-  border:1px solid rgba(222,187,123,.55);
-  border-radius:12px;
+#catalog .lux-categories{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:10px !important;
+  margin:0 0 30px !important;
+}
 
-  background:
-    linear-gradient(
-      135deg,
-      #d8b36d 0%,
-      #efd59d 48%,
-      #c99c50 100%
-    );
+#catalog .lux-categories a{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  width:100% !important;
+  padding:17px 20px !important;
 
-  color:#24170d;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:.05em;
+  background:linear-gradient(
+    135deg,
+    #d8b36d 0%,
+    #efd59d 48%,
+    #c99c50 100%
+  ) !important;
+
+  border:1px solid rgba(222,187,123,.55) !important;
+  border-radius:12px !important;
+
+  color:#24170d !important;
+  text-decoration:none !important;
 
   box-shadow:
-    0 12px 30px rgba(0,0,0,.25),
-    inset 0 1px rgba(255,255,255,.45);
+    0 10px 25px rgba(0,0,0,.20),
+    inset 0 1px rgba(255,255,255,.45) !important;
 }
 
-.lux-catalog-btn span{
-  font-size:22px;
-  line-height:1;
+#catalog .lux-categories b{
+  color:#24170d !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:15px !important;
+  letter-spacing:.06em !important;
 }
 
-@media(max-width:560px){
-  .lux-catalog-btn{
-    width:100%;
-    margin-top:24px;
-    padding:18px 22px;
-  }
+#catalog .lux-categories i{
+  color:#24170d !important;
+  font-size:20px !important;
+  font-style:normal !important;
 }
