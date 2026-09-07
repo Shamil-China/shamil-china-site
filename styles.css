@@ -1440,9 +1440,10 @@ body{
 }
 
 /* Instagram и Telegram специально НЕ меняем */
-/* ===== FOOTER LINKS COLOR ===== */
+/* ===== FOOTER SOCIAL LINKS ===== */
 
-.footer a{
+footer a{
   color:#b8aa96 !important;
   opacity:1 !important;
+  font-weight:600 !important;
 }
