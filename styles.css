@@ -1301,3 +1301,39 @@ body{
   font-size:20px !important;
   font-style:normal !important;
 }
+  /* ===== LUXURY BRAND FILTERS ===== */
+
+#brandFilters{
+  gap:9px;
+}
+
+#brandFilters .filter{
+  background:rgba(255,255,255,.035) !important;
+  color:#d8c9b5 !important;
+
+  border:1px solid rgba(201,161,94,.38) !important;
+  border-radius:999px !important;
+
+  padding:11px 17px !important;
+
+  box-shadow:none !important;
+  backdrop-filter:blur(8px);
+
+  transition:.2s ease;
+}
+
+#brandFilters .filter.active{
+  background:linear-gradient(
+    135deg,
+    #d8b36d 0%,
+    #efd59d 48%,
+    #c99c50 100%
+  ) !important;
+
+  color:#24170d !important;
+  border-color:#d8b36d !important;
+
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.18),
+    inset 0 1px rgba(255,255,255,.4) !important;
+}
