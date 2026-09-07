@@ -240,6 +240,85 @@ function openProduct(id) {
     mainImage.src =
       images[0] || '';
   }
+   let currentImageIndex = 0;
+let touchStartX = 0;
+
+function showImage(index) {
+  if (!mainImage || !images.length) return;
+
+  currentImageIndex =
+    (index + images.length) % images.length;
+
+  mainImage.style.opacity = '0';
+
+  setTimeout(() => {
+    mainImage.src = images[currentImageIndex];
+    mainImage.style.opacity = '1';
+    updateDots();
+  }, 120);
+}
+
+let dots = document.getElementById('imageDots');
+
+if (!dots && mainImage) {
+  dots = document.createElement('div');
+  dots.id = 'imageDots';
+
+  dots.style.position = 'absolute';
+  dots.style.bottom = '14px';
+  dots.style.left = '50%';
+  dots.style.transform = 'translateX(-50%)';
+  dots.style.display = 'flex';
+  dots.style.gap = '7px';
+  dots.style.zIndex = '10';
+
+  mainImage.parentElement.style.position = 'relative';
+  mainImage.parentElement.appendChild(dots);
+}
+
+function updateDots() {
+  if (!dots) return;
+
+  dots.innerHTML = images.map((_, index) => `
+    <span style="
+      width:${index === currentImageIndex ? '18px' : '7px'};
+      height:7px;
+      border-radius:20px;
+      background:${index === currentImageIndex
+        ? '#fff'
+        : 'rgba(255,255,255,.55)'};
+      transition:.25s;
+    "></span>
+  `).join('');
+}
+
+updateDots();
+
+if (mainImage && images.length > 1) {
+
+  mainImage.style.transition = 'opacity .22s ease';
+  mainImage.style.touchAction = 'pan-y';
+
+  mainImage.ontouchstart = (e) => {
+    touchStartX = e.touches[0].clientX;
+  };
+
+  mainImage.ontouchend = (e) => {
+    const touchEndX =
+      e.changedTouches[0].clientX;
+
+    const distance =
+      touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 40) return;
+
+    if (distance < 0) {
+      showImage(currentImageIndex + 1);
+    } else {
+      showImage(currentImageIndex - 1);
+    }
+  };
+}
 let currentImageIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
