@@ -1492,3 +1492,14 @@ footer a{
     background:#c9a15e;
   }
 }
+/* ===== ABOUT CONTRAST FIX ===== */
+
+.about-copy h2{
+  color:#3a281a !important;
+}
+
+.about-links a{
+  color:#9b7946 !important;
+  opacity:1 !important;
+  font-weight:600 !important;
+}
