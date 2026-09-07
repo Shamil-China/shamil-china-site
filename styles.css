@@ -1386,3 +1386,57 @@ body{
     inset 0 1px rgba(255,255,255,.4),
     0 8px 20px rgba(0,0,0,.22) !important;
 }
+/* ===== LUXURY PRODUCT MODAL ===== */
+
+.modal-card{
+  background:#f3eadc !important;
+  color:#24170d !important;
+  border:1px solid rgba(201,161,94,.38) !important;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    inset 0 1px rgba(255,255,255,.65) !important;
+}
+
+.modal-card h2{
+  color:#24170d !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-weight:500 !important;
+}
+
+.modal-card .modal-brand{
+  color:#9b7946 !important;
+}
+
+.modal-card .modal-desc{
+  color:#6f6254 !important;
+}
+
+.modal-card .pill{
+  background:rgba(255,255,255,.30) !important;
+  color:#665746 !important;
+  border-color:rgba(139,105,62,.28) !important;
+}
+
+.modal-card .price-row{
+  border-color:rgba(139,105,62,.22) !important;
+}
+
+.modal-card .price-row strong{
+  color:#24170d !important;
+}
+
+/* AI-примерка — champagne */
+.modal-card #tryOnBtn{
+  background:linear-gradient(
+    135deg,
+    #d8b36d 0%,
+    #efd59d 48%,
+    #c99c50 100%
+  ) !important;
+
+  color:#24170d !important;
+  border:1px solid rgba(201,161,94,.45) !important;
+}
+
+/* Instagram и Telegram специально НЕ меняем */
