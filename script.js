@@ -277,7 +277,7 @@ updateDots();
       images.length;
 
     mainImage.classList.add('fade-image');
-
+updateDots();
 setTimeout(() => {
   mainImage.src =
     images[currentImageIndex];
@@ -389,7 +389,16 @@ setTimeout(() => {
     'hidden';
 }
 
+function closeModal() {
+  const modal =
+    document.getElementById('modal');
 
+  if (modal) {
+    modal.classList.remove('show');
+  }
+
+  document.body.style.overflow = '';
+}
 /* =========================================================
    ФИЛЬТРАЦИЯ КАТАЛОГА
    БРЕНД + РАЗДЕЛ
