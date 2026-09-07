@@ -1649,4 +1649,9 @@ footer a{
 .menu-panel .menu-socials a{
   color:#c9a15e !important;
 }
-  
+  /* Каталог в burger menu */
+.menu-panel .catalog-toggle,
+.menu-panel .menu-catalog,
+.menu-panel button{
+  color:#f3eadc !important;
+}
