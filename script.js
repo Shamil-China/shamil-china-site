@@ -241,66 +241,6 @@ function openProduct(id) {
       images[0] || '';
   
 }
-let currentImageIndex = 0;
-let touchStartX = 0;
-
-let dotsEl = document.getElementById('imageDots');
-
-if (!dotsEl && mainImage) {
-  dotsEl = document.createElement('div');
-  dotsEl.id = 'imageDots';
-  dotsEl.className = 'image-dots';
-  mainImage.parentElement.appendChild(dotsEl);
-}
-
-function updateImageDots() {
-  if (!dotsEl) return;
-
-  dotsEl.innerHTML = images
-    .map((_, i) => `
-      <span class="${i === currentImageIndex ? 'active' : ''}"></span>
-    `)
-    .join('');
-}
-
-function showImage(index) {
-  if (!mainImage || !images.length) return;
-
-  currentImageIndex =
-    (index + images.length) % images.length;
-
-  mainImage.classList.add('image-changing');
-
-  setTimeout(() => {
-    mainImage.src = images[currentImageIndex];
-    mainImage.classList.remove('image-changing');
-    updateImageDots();
-  }, 120);
-}
-
-updateImageDots();
-
-if (mainImage && images.length > 1) {
-  mainImage.ontouchstart = (e) => {
-    touchStartX = e.touches[0].clientX;
-  };
-
-  mainImage.ontouchend = (e) => {
-    const touchEndX =
-      e.changedTouches[0].clientX;
-
-    const distance =
-      touchEndX - touchStartX;
-
-    if (Math.abs(distance) < 40) return;
-
-    if (distance < 0) {
-      showImage(currentImageIndex + 1);
-    } else {
-      showImage(currentImageIndex - 1);
-    }
-  };
-}
   if(variantsEl){
 
     variantsEl.innerHTML =
