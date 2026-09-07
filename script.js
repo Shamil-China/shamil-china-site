@@ -1019,34 +1019,5 @@ async function startStore() {
 
 startStore();
 
-.image-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 14px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 5;
-}
 
-.image-dots span {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.55);
-  box-shadow: 0 1px 4px rgba(0,0,0,.18);
-  transition: all .25s ease;
-}
-
-.image-dots span.active {
-  width: 18px;
-  background: #fff;
-}
-
-#mainImage {
-  transition: opacity .22s ease;
-}
-
-#mainImage.image-changing {
-  opacity: .45;
 }
