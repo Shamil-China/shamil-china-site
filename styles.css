@@ -1336,4 +1336,63 @@ body{
   box-shadow:
     0 8px 22px rgba(0,0,0,.18),
     inset 0 1px rgba(255,255,255,.4) !important;
+  
+}
+/* ===== LUXURY PRODUCT CARDS ===== */
+
+.product-card{
+  background:#18120d !important;
+  border:1px solid rgba(201,161,94,.20) !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.28) !important;
+}
+
+.product-card .product-info{
+  background:
+    linear-gradient(
+      180deg,
+      #1d160f 0%,
+      #130f0b 100%
+    ) !important;
+
+  color:#f3eadc !important;
+  border-top:1px solid rgba(201,161,94,.14) !important;
+}
+
+.product-card h3,
+.product-card .product-title{
+  color:#f3eadc !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-weight:500 !important;
+}
+
+.product-card .brand,
+.product-card .product-brand{
+  color:#b9a88f !important;
+}
+
+.product-card .price,
+.product-card .product-price{
+  color:#d8b36d !important;
+}
+
+.product-card .details-btn,
+.product-card button{
+  background:linear-gradient(
+    135deg,
+    #d8b36d 0%,
+    #efd59d 48%,
+    #c99c50 100%
+  ) !important;
+
+  color:#24170d !important;
+  border:0 !important;
+  border-radius:12px !important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.35),
+    0 8px 20px rgba(0,0,0,.20) !important;
 }
