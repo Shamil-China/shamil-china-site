@@ -434,3 +434,9 @@ right: 8px;
 .image-dots span.active {
   background: #111;
 }
+@media (max-width: 560px) {
+  .topbar {
+    padding-top: calc(12px + env(safe-area-inset-top));
+  }
+}
+
