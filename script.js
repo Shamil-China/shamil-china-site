@@ -259,8 +259,14 @@ function openProduct(id) {
       (index + images.length) %
       images.length;
 
-    mainImage.src =
-      images[currentImageIndex];
+    mainImage.classList.add('fade-image');
+
+setTimeout(() => {
+  mainImage.src =
+    images[currentImageIndex];
+
+  mainImage.classList.remove('fade-image');
+}, 120);
 
     if (thumbsEl) {
       thumbsEl
@@ -1058,3 +1064,11 @@ async function startStore() {
 
 
 startStore();
+
+#mainImage {
+  transition: opacity .22s ease;
+}
+
+#mainImage.fade-image {
+  opacity: .35;
+}
