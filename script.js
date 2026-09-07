@@ -349,12 +349,6 @@ if (mainImage && images.length > 1) {
             if(mainImage){
               mainImage.src =
                 images[index] || '';
-            }
-
-          }
-        );
-
-      });
 
   }
 
