@@ -1655,3 +1655,19 @@ footer a{
 .menu-panel button{
   color:#f3eadc !important;
 }
+  /* ===== LUXURY PRODUCT BUTTONS ===== */
+
+#tryOnBtn,
+.modal-info .red,
+.modal-info .telegram-btn {
+  background: linear-gradient(135deg, #d8b878, #b98b52) !important;
+  border-color: #c49a5a !important;
+  color: #24170f !important;
+}
+
+#tryOnBtn:hover,
+.modal-info .red:hover,
+.modal-info .telegram-btn:hover {
+  background: linear-gradient(135deg, #e2c58c, #c69a5c) !important;
+  border-color: #d0aa6a !important;
+}
