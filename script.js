@@ -242,6 +242,175 @@ function openProduct(id) {
   }
 let currentImageIndex = 0;
 let touchStartX = 0;
+let touchStartY = 0;
+
+let dotsEl = document.getElementById('modalImageDots');
+
+if (!dotsEl && mainImage) {
+  dotsEl = document.createElement('div');
+  dotsEl.id = 'modalImageDots';
+
+  Object.assign(dotsEl.style, {
+    position: 'absolute',
+    left: '50%',
+    bottom: '14px',
+    transform: 'translateX(-50%)',
+    display: 'flex',
+    gap: '7px',
+    zIndex: '5'
+  });
+
+  const imageParent = mainImage.parentElement;
+
+  if (imageParent) {
+    imageParent.style.position = 'relative';
+    imageParent.appendChild(dotsEl);
+  }
+}
+
+function updateDots() {
+  if (!dotsEl) return;
+
+  dotsEl.innerHTML = images.map((_, index) => `
+    <span style="
+      width:${index === currentImageIndex ? '18px' : '7px'};
+      height:7px;
+      border-radius:20px;
+      background:${index === currentImageIndex
+        ? '#ffffff'
+        : 'rgba(255,255,255,.55)'};
+      box-shadow:0 1px 5px rgba(0,0,0,.18);
+      transition:all .25s ease;
+      display:block;
+    "></span>
+  `).join('');
+}
+
+function showModalImage(index, direction = 0) {
+  if (!mainImage || !images.length) return;
+
+  currentImageIndex =
+    (index + images.length) % images.length;
+
+  const changeImage = () => {
+    mainImage.src = images[currentImageIndex];
+
+    mainImage.style.transition = 'none';
+    mainImage.style.transform =
+      `translateX(${direction * 35}px)`;
+    mainImage.style.opacity = '0.7';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        mainImage.style.transition =
+          'transform .28s ease, opacity .28s ease';
+
+        mainImage.style.transform = 'translateX(0)';
+        mainImage.style.opacity = '1';
+      });
+    });
+
+    updateDots();
+
+    if (thumbsEl) {
+      thumbsEl
+        .querySelectorAll('button')
+        .forEach((button, i) => {
+          button.classList.toggle(
+            'active',
+            i === currentImageIndex
+          );
+        });
+    }
+  };
+
+  mainImage.style.transition =
+    'transform .14s ease, opacity .14s ease';
+
+  mainImage.style.transform =
+    `translateX(${direction * -35}px)`;
+
+  mainImage.style.opacity = '0.7';
+
+  setTimeout(changeImage, 140);
+}
+
+updateDots();
+
+if (mainImage && images.length > 1) {
+
+  mainImage.style.touchAction = 'pan-y';
+
+  mainImage.ontouchstart = (event) => {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+  };
+
+  mainImage.ontouchmove = (event) => {
+    const moveX =
+      event.touches[0].clientX - touchStartX;
+
+    const moveY =
+      event.touches[0].clientY - touchStartY;
+
+    if (Math.abs(moveX) > Math.abs(moveY)) {
+      mainImage.style.transition = 'none';
+      mainImage.style.transform =
+        `translateX(${moveX * 0.25}px)`;
+    }
+  };
+
+  mainImage.ontouchend = (event) => {
+    const touchEndX =
+      event.changedTouches[0].clientX;
+
+    const distance =
+      touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 40) {
+      mainImage.style.transition =
+        'transform .2s ease';
+
+      mainImage.style.transform =
+        'translateX(0)';
+
+      return;
+    }
+
+    if (distance < 0) {
+      showModalImage(
+        currentImageIndex + 1,
+        1
+      );
+    } else {
+      showModalImage(
+        currentImageIndex - 1,
+        -1
+      );
+    }
+  };
+}
+
+if (thumbsEl) {
+  thumbsEl.addEventListener(
+    'click',
+    (event) => {
+      const button =
+        event.target.closest(
+          '[data-img-index]'
+        );
+
+      if (!button) return;
+
+      currentImageIndex =
+        Number(button.dataset.imgIndex);
+
+      updateDots();
+    },
+    true
+  );
+}
+let touchStartX = 0;
 
 function showModalImage(index) {
   if (!mainImage || !images.length) return;
