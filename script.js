@@ -1090,3 +1090,135 @@ async function startStore() {
 
 
 startStore();
+/* =========================================================
+   AI VIRTUAL TRY-ON
+========================================================= */
+
+document.addEventListener('change', async (event) => {
+  if (event.target?.id !== 'tryOnPhoto') {
+    return;
+  }
+
+  const file = event.target.files?.[0];
+
+  if (!file) {
+    return;
+  }
+
+  const tryOnBtn =
+    document.getElementById('tryOnBtn');
+
+  const mainImage =
+    document.getElementById('mainImage');
+
+  const modalTitle =
+    document.getElementById('modalTitle')
+      ?.textContent
+      ?.trim();
+
+  const product =
+    Object.values(products).find(
+      item =>
+        (item.title || '').trim() === modalTitle
+    );
+
+  const garmentImage =
+    product?.images?.[0];
+
+  if (!garmentImage) {
+    alert('Не удалось найти фото товара.');
+    return;
+  }
+
+  try {
+    if (tryOnBtn) {
+      tryOnBtn.disabled = true;
+      tryOnBtn.textContent =
+        '✨ Создаём примерку...';
+    }
+
+    const modelImage =
+      await new Promise(
+        (resolve, reject) => {
+          const reader = new FileReader();
+
+          reader.onload =
+            () => resolve(reader.result);
+
+          reader.onerror =
+            () => reject(
+              new Error('Не удалось прочитать фото')
+            );
+
+          reader.readAsDataURL(file);
+        }
+      );
+
+    const response = await fetch(
+      `${SUPABASE_URL}/functions/v1/virtual-tryon`,
+      {
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+
+          apikey:
+            SUPABASE_PUBLISHABLE_KEY,
+
+          Authorization:
+            `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+        },
+
+        body: JSON.stringify({
+          model_image: modelImage,
+          garment_image: garmentImage
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (
+      !response.ok ||
+      !data.success ||
+      !data.output?.[0]
+    ) {
+      throw new Error(
+        data.error ||
+        'Не удалось создать примерку'
+      );
+    }
+
+    if (mainImage) {
+      mainImage.src =
+        data.output[0];
+    }
+
+    alert(
+      '✨ Готово! Это AI-визуализация — цвет, детали и посадка могут отличаться от реального товара.'
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Virtual try-on error:',
+      error
+    );
+
+    alert(
+      'Не получилось создать примерку. Попробуйте другое фото.'
+    );
+
+  } finally {
+
+    if (tryOnBtn) {
+      tryOnBtn.disabled = false;
+      tryOnBtn.textContent =
+        '✨ Примерить на себе';
+    }
+
+    event.target.value = '';
+  }
+});
+
