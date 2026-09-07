@@ -648,3 +648,654 @@ body{
     padding:18px 22px;
   }
 }
+
+  
+:root{--bg:#090909;--panel:#111;--soft:#171717;--line:#272727;--text:#f5f5f2;--muted:#969690;--red:#e42a1e}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{text-decoration:none;color:inherit} button{font:inherit}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 5vw;background:rgba(9,9,9,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em}.brand img{width:40px;height:40px;border-radius:50%;object-fit:cover}.brand i{font-style:normal;color:#9b9b95;font-weight:600}
+nav{display:flex;gap:28px;font-size:14px;color:#c9c9c4}.telegram-pill{padding:10px 14px;border-radius:999px;background:#151515;border:1px solid var(--line);font-size:13px;font-weight:800}
+.hero{min-height:78vh;padding:64px 7vw;display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;align-items:center}
+.kicker{font-size:12px;letter-spacing:.24em;color:#83837d;font-weight:800}
+h1,h2{letter-spacing:-.055em;line-height:.96;margin:14px 0}
+h1{font-size:clamp(48px,8vw,105px)}h1 em{font-style:normal;color:var(--red)}
+.hero-copy p{max-width:670px;color:#b9b9b3;font-size:18px;line-height:1.7}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 19px;border-radius:12px;font-weight:850}.red{background:var(--red);color:white}.dark{background:#151515;border:1px solid var(--line)}.white{background:#fff;color:#111}.full{width:100%}
+.trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:25px;color:#777772;font-size:13px}.hero-visual{position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#111;min-height:560px}.hero-visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.hero-label{position:absolute;left:20px;bottom:20px;padding:9px 12px;border-radius:999px;background:rgba(0,0,0,.75);font-size:11px;letter-spacing:.18em}
+.marquee{display:flex;gap:18px;white-space:nowrap;overflow:hidden;padding:14px 5vw;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:#74746e;font-size:12px;letter-spacing:.16em}
+.catalog,.how{padding:90px 7vw}.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:32px}.section-head h2,.about h2,.cta h2{font-size:clamp(40px,5.5vw,76px)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:#111;color:#aaa;padding:9px 13px;border-radius:999px;cursor:pointer}.filter.active{background:#fff;color:#111}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.product{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#101010}.gallery{display:block;position:relative;width:100%;border:0;padding:0;background:none;cursor:pointer;aspect-ratio:1/1;overflow:hidden}.gallery img{width:100%;height:100%;object-fit:cover;transition:.35s}.gallery:hover img{transform:scale(1.025)}.tag{position:absolute;top:14px;left:14px;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.72);font-size:10px;letter-spacing:.16em;color:#fff}
+.product-meta{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px}.product-meta h3{margin:0 0 6px;font-size:18px}.product-meta p{margin:0;color:#797974;font-size:13px}.smallbtn{background:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer}
+.note{margin-top:20px;border:1px dashed #333;border-radius:16px;padding:19px 20px;display:flex;justify-content:space-between;gap:20px;align-items:center;color:#8f8f89}.note div{display:grid;gap:4px}.note b,.note a{color:white}
+.about{padding:30px 7vw 95px;display:grid;grid-template-columns:1.15fr .85fr;gap:22px}.about-copy,.about-card{border-radius:26px;padding:42px;border:1px solid var(--line)}.about-copy p{font-size:18px;line-height:1.75;color:#aaa}.about-copy a{font-weight:800;display:inline-block;margin-top:16px}.about-card{background:#e6dfd4;color:#161616;display:flex;flex-direction:column;justify-content:space-between;min-height:450px}.about-card img{width:110px;height:110px;border-radius:50%;object-fit:cover}.about-card blockquote{margin:0;font-size:clamp(28px,3vw,44px);line-height:1.05;letter-spacing:-.04em}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.steps>div{border-top:1px solid #303030;padding:22px 0}.steps b{color:var(--red);font-size:13px}.steps h3{font-size:20px;margin:17px 0 8px}.steps p{color:#85857f;font-size:14px;line-height:1.6}
+.cta{margin:0 7vw 65px;padding:42px;border-radius:28px;background:var(--red);display:flex;justify-content:space-between;gap:25px;align-items:end}.cta .kicker{color:#ffd1cb}.cta h2{margin-bottom:0}
+.disclaimer{padding:0 7vw 60px;color:#666661;font-size:12px;line-height:1.6;max-width:1050px}
+footer{padding:28px 7vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#767670}
+.modal{position:fixed;inset:0;z-index:100;display:none}.modal.show{display:block}.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}.modal-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1100px,94vw);max-height:92vh;overflow:auto;background:#101010;border:1px solid var(--line);border-radius:24px;padding:22px}.close{position:absolute;top:16px;right:16px;z-index:3;border:1px solid #333;background:#111;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer}.modal-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px}.modal-gallery>img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#161616}.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}.thumbs button{border:0;padding:0;background:none;cursor:pointer}.thumbs img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px}.modal-info{padding:22px 10px}.modal-info h2{font-size:clamp(38px,5vw,68px)}.modal-info>p{color:#a4a49e;line-height:1.7}.variants{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.variant{border:1px solid #333;border-radius:999px;padding:8px 11px;color:#c9c9c3;font-size:13px}.price-line{display:flex;justify-content:space-between;padding:18px 0;border-top:1px solid #2b2b2b;border-bottom:1px solid #2b2b2b;margin:18px 0}.micro{font-size:12px!important;color:#696964!important}
+@media(max-width:900px){nav{display:none}.hero{grid-template-columns:1fr}.hero-visual{min-height:470px}.product-grid,.about,.modal-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.section-head,.cta{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.topbar{padding:12px 15px}.brand span{font-size:12px}.telegram-pill{display:none}.hero,.catalog,.how,.about{padding-left:18px;padding-right:18px}.hero{padding-top:40px}.hero-visual{min-height:390px}.product-grid{grid-template-columns:1fr}.product-meta{align-items:flex-start}.note{flex-direction:column;align-items:flex-start}.steps{grid-template-columns:1fr}.cta{margin-left:18px;margin-right:18px;padding:28px}.modal-card{padding:14px}.thumbs{grid-template-columns:repeat(4,1fr)}footer{padding-left:18px;padding-right:18px;font-size:12px}}
+
+
+/* ===== SHAMIL | CHINA — Light / Ivory premium theme ===== */
+:root{
+  --bg:#f5f1e9;
+  --panel:#fffdf9;
+  --soft:#eee8dd;
+  --line:#d8d0c2;
+  --text:#171717;
+  --muted:#746f66;
+  --red:#cf2d22;
+}
+body{
+  background:
+    radial-gradient(circle at 90% 0%, rgba(207,45,34,.06), transparent 28%),
+    linear-gradient(180deg,#fbf8f2 0%,#f4efe6 100%);
+  color:var(--text);
+}
+.topbar{
+  background:rgba(251,248,242,.9);
+  border-bottom:1px solid var(--line);
+}
+.brand i, nav{color:#706a61}
+.telegram-pill,.instagram-pill{
+  padding:10px 14px;
+  border-radius:999px;
+  background:#fffdf9;
+  border:1px solid var(--line);
+  font-size:13px;
+  font-weight:800;
+  color:#171717;
+}
+.instagram-pill{background:#171717;color:#fff}
+.social-pills{display:flex;align-items:center;gap:8px}
+.hero-copy p{color:#5f5a53}
+.trust{color:#7d766c}
+.hero-visual{
+  border-color:var(--line);
+  background:#ece5d8;
+  box-shadow:0 24px 70px rgba(73,58,40,.12);
+}
+.hero-label{background:rgba(255,253,249,.9);color:#161616;border:1px solid rgba(30,30,30,.08)}
+.marquee{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  color:#8a8176;
+}
+.filter{
+  border:1px solid var(--line);
+  background:#fffdf9;
+  color:#6b645b;
+}
+.filter.active{background:#171717;color:#fff}
+.product{
+  border:1px solid var(--line);
+  background:#fffdf9;
+  box-shadow:0 12px 32px rgba(67,55,40,.06);
+}
+.product-meta p{color:#7d766d}
+.smallbtn{
+  background:#171717;
+  color:#fff;
+}
+.note{
+  border-color:#cfc5b6;
+  background:rgba(255,255,255,.42);
+  color:#766f65;
+}
+.note b,.note a{color:#171717}
+.about-copy,.about-card{
+  border-color:var(--line);
+}
+.about-copy{
+  background:#fffdf9;
+}
+.about-copy p{color:#665f56}
+.about-card{
+  background:#e7ded0;
+  color:#171717;
+}
+.about-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
+.about-links a{font-weight:800}
+.steps>div{border-top:1px solid #cec6b9}
+.steps p{color:#746d63}
+.cta{background:#171717;color:#fff}
+.cta .kicker{color:#d8d1c7}
+.disclaimer{color:#7f786e}
+footer{
+  border-top:1px solid var(--line);
+  color:#726b61;
+}
+.footer-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.footer-links a{color:#171717;font-weight:750}
+.modal-backdrop{background:rgba(55,45,34,.36)}
+.modal-card{
+  background:#fffdf9;
+  border:1px solid var(--line);
+  color:#171717;
+  box-shadow:0 30px 100px rgba(47,37,24,.22);
+}
+.close{
+  border:1px solid var(--line);
+  background:#171717;
+  color:#fff;
+}
+.modal-gallery>img{background:#eee7dc}
+.modal-info>p{color:#6c655c}
+.variant{
+  border:1px solid #cfc6b9;
+  color:#5f584f;
+  background:#f8f4ed;
+}
+.price-line{
+  border-top:1px solid #d9d0c3;
+  border-bottom:1px solid #d9d0c3;
+}
+.micro{color:#7d766c!important}
+.btn.dark{
+  background:#fffdf9;
+  border:1px solid var(--line);
+  color:#171717;
+}
+.btn.white{
+  background:#f5f1e9;
+  color:#171717;
+}
+@media(max-width:560px){
+  .social-pills{display:flex}
+  .instagram-pill{display:none}
+  .telegram-pill{display:none}
+}
+.telegram-btn {
+  background: #229ED9;
+  color: #fff;
+  border-color: #229ED9;
+}
+
+.telegram-btn:hover {
+  background: #1d8fc5;
+  border-color: #1d8fc5;
+}
+/* SHAMIL CHINA — BURGER MENU */
+
+.menu-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  position: absolute;
+right: 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.menu-btn span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #111;
+  border-radius: 10px;
+}
+
+.side-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.side-menu.open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.side-menu.open .menu-overlay {
+  opacity: 1;
+}
+
+.menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(88vw, 420px);
+  height: 100%;
+  padding: 26px;
+  background: #f5f1e9;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open .menu-panel {
+  transform: translateX(0);
+}
+
+.menu-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.menu-close {
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+
+.menu-links a {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  color: #111;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.menu-socials {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-socials span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: .55;
+}
+
+.menu-socials a {
+  color: #111;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.menu-panel {
+  background: #f5f1e9 !important;
+  opacity: 1 !important;
+}
+
+.menu-panel * {
+  opacity: 1;
+}
+.menu-catalog-toggle{
+  width:100%;
+  border:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  padding:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font:inherit;
+  font-size:clamp(24px,5vw,34px);
+  font-weight:800;
+  color:var(--text);
+  cursor:pointer;
+}
+
+.menu-subcatalog{
+  display:none;
+  padding:0 0 8px;
+}
+
+.menu-subcatalog.open{
+  display:block;
+}
+
+.menu-subcatalog a{
+  display:block;
+  padding:16px 18px;
+  font-size:20px;
+  font-weight:650;
+  border-bottom:1px solid var(--line);
+}
+
+.catalog-arrow{
+  transition:transform .25s ease;
+}
+
+.menu-catalog-toggle.open .catalog-arrow{
+  transform:rotate(90deg);
+}
+/* Плавная смена фото на главной */
+.hero-visual img {
+  transition: opacity 0.5s ease;
+}
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #F7F3EB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  animation: splashOut 0.7s ease 1.8s forwards;
+}
+
+.app-splash img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 32px;
+  animation: splashLogo 0.8s ease both;
+}
+
+.app-splash-name {
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #111;
+  animation: splashLogo 0.8s 0.15s ease both;
+}
+
+@keyframes splashLogo {
+  from {
+    opacity: 0;
+    transform: scale(.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes splashOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.app-splash::before {
+  content: "";
+  width: 170px;
+  height: 170px;
+  border-radius: 36px;
+  background: url("/app-icon.png.PNG") center / cover no-repeat;
+  animation: splashLogo 0.8s ease both;
+}
+
+.app-splash > img {
+  display: none;
+}
+/* В обычном браузере заставку не показываем */
+.app-splash {
+  display: none;
+}
+
+/* Показываем только установленное приложение */
+@media (display-mode: standalone) {
+  .app-splash {
+    display: flex;
+  }
+
+ #mainImage {
+  transition: opacity .22s ease;
+}
+
+#mainImage.fade-image {
+  opacity: .35;
+} 
+
+.image-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.image-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .20);
+}
+
+.image-dots span.active {
+  background: #111;
+}
+@media (max-width: 560px) {
+  .topbar {
+    padding-top: calc(12px + env(safe-area-inset-top));
+  }
+}
+/* ===== SHAMIL CHINA — ITALIAN LUXURY ===== */
+
+:root{
+  --lux-black:#15120e;
+  --lux-brown:#2e2117;
+  --lux-gold:#c9a15e;
+  --lux-cream:#f3eadc;
+  --lux-muted:#b8aa96;
+}
+
+body{
+  background:
+    radial-gradient(circle at 80% 5%, #39291c 0, transparent 28%),
+    linear-gradient(180deg,#17130f 0%,#0f0d0a 100%);
+  color:var(--lux-cream);
+}
+
+.topbar{
+  background:rgba(18,15,11,.88);
+  border-bottom:1px solid rgba(201,161,94,.18);
+}
+
+.brand{
+  color:var(--lux-cream);
+}
+
+.brand i{
+  color:var(--lux-muted);
+}
+
+.menu-btn span{
+  background:var(--lux-cream);
+}
+
+.hero-copy .kicker{
+  color:var(--lux-gold);
+}
+
+.hero-copy h1{
+  color:var(--lux-cream);
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+}
+
+.hero-copy h1 em{
+  color:var(--lux-gold);
+}
+
+.hero-copy p{
+  color:#d1c5b5;
+}
+
+.trust{
+  color:#ad9e8b;
+}
+
+.hero-visual{
+  border-color:rgba(201,161,94,.25);
+  background:#211a13;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.hero-label{
+  background:rgba(20,16,12,.88);
+  color:var(--lux-gold);
+  border:1px solid rgba(201,161,94,.35);
+}
+
+.marquee{
+  color:#a9967c;
+  border-color:rgba(201,161,94,.18);
+}
+
+@media(max-width:560px){
+  .topbar{
+    padding-top:calc(12px + env(safe-area-inset-top));
+  }
+
+  .hero{
+    min-height:auto;
+    padding-top:48px;
+  }
+
+  .hero-copy h1{
+    font-size:54px;
+    line-height:.94;
+  }
+
+  .hero-copy p{
+    font-size:17px;
+    line-height:1.6;
+  }
+
+  .hero-visual{
+    min-height:480px;
+    border-radius:22px;
+  }
+}
+/* ===== LUXURY MOBILE HERO — STEP 2 ===== */
+
+@media (max-width:560px){
+
+  .hero{
+    display:block;
+    padding-bottom:0;
+  }
+
+  .hero-copy{
+    position:relative;
+    z-index:2;
+  }
+
+  .hero-copy::after{
+    content:"";
+    display:block;
+    width:56px;
+    height:1px;
+    margin-top:28px;
+    background:#c9a15e;
+  }
+
+  .hero-visual{
+    width:calc(100% + 36px);
+    margin-left:-18px;
+    margin-top:28px;
+    min-height:540px;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    border-color:rgba(201,161,94,.22);
+    box-shadow:
+      0 -25px 60px rgba(0,0,0,.18),
+      0 30px 80px rgba(0,0,0,.35);
+  }
+
+  .hero-visual::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(20,14,9,.35) 0%,
+        transparent 28%,
+        transparent 70%,
+        rgba(15,11,8,.28) 100%
+      );
+  }
+
+  .hero-visual img{
+    object-fit:cover;
+  }
+
+  .hero-label{
+    z-index:2;
+    left:20px;
+    bottom:20px;
+    color:#d6b574;
+    background:rgba(20,15,10,.72);
+    border:1px solid rgba(201,161,94,.35);
+    backdrop-filter:blur(12px);
+  }
+}
+/* ===== LUXURY CATALOG BUTTON ===== */
+
+.lux-catalog-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:34px;
+  margin-top:22px;
+  padding:17px 22px;
+  min-width:260px;
+  border:1px solid rgba(222,187,123,.55);
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d8b36d 0%,
+      #efd59d 48%,
+      #c99c50 100%
+    );
+
+  color:#24170d;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.05em;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.25),
+    inset 0 1px rgba(255,255,255,.45);
+}
+
+.lux-catalog-btn span{
+  font-size:22px;
+  line-height:1;
+}
+
+@media(max-width:560px){
+  .lux-catalog-btn{
+    width:100%;
+    margin-top:24px;
+    padding:18px 22px;
+  }
+}
