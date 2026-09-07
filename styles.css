@@ -439,4 +439,101 @@ right: 8px;
     padding-top: calc(12px + env(safe-area-inset-top));
   }
 }
+/* ===== SHAMIL CHINA — ITALIAN LUXURY ===== */
 
+:root{
+  --lux-black:#15120e;
+  --lux-brown:#2e2117;
+  --lux-gold:#c9a15e;
+  --lux-cream:#f3eadc;
+  --lux-muted:#b8aa96;
+}
+
+body{
+  background:
+    radial-gradient(circle at 80% 5%, #39291c 0, transparent 28%),
+    linear-gradient(180deg,#17130f 0%,#0f0d0a 100%);
+  color:var(--lux-cream);
+}
+
+.topbar{
+  background:rgba(18,15,11,.88);
+  border-bottom:1px solid rgba(201,161,94,.18);
+}
+
+.brand{
+  color:var(--lux-cream);
+}
+
+.brand i{
+  color:var(--lux-muted);
+}
+
+.menu-btn span{
+  background:var(--lux-cream);
+}
+
+.hero-copy .kicker{
+  color:var(--lux-gold);
+}
+
+.hero-copy h1{
+  color:var(--lux-cream);
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+}
+
+.hero-copy h1 em{
+  color:var(--lux-gold);
+}
+
+.hero-copy p{
+  color:#d1c5b5;
+}
+
+.trust{
+  color:#ad9e8b;
+}
+
+.hero-visual{
+  border-color:rgba(201,161,94,.25);
+  background:#211a13;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.hero-label{
+  background:rgba(20,16,12,.88);
+  color:var(--lux-gold);
+  border:1px solid rgba(201,161,94,.35);
+}
+
+.marquee{
+  color:#a9967c;
+  border-color:rgba(201,161,94,.18);
+}
+
+@media(max-width:560px){
+  .topbar{
+    padding-top:calc(12px + env(safe-area-inset-top));
+  }
+
+  .hero{
+    min-height:auto;
+    padding-top:48px;
+  }
+
+  .hero-copy h1{
+    font-size:54px;
+    line-height:.94;
+  }
+
+  .hero-copy p{
+    font-size:17px;
+    line-height:1.6;
+  }
+
+  .hero-visual{
+    min-height:480px;
+    border-radius:22px;
+  }
+}
