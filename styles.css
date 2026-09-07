@@ -1503,3 +1503,76 @@ footer a{
   opacity:1 !important;
   font-weight:600 !important;
 }
+/* ===== LUXURY HOW IT WORKS ===== */
+
+.how{
+  padding-top:46px !important;
+  padding-bottom:46px !important;
+}
+
+.how .section-head .kicker{
+  color:#c9a15e !important;
+  letter-spacing:.20em !important;
+}
+
+.how .section-head h2{
+  color:#f3eadc !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-weight:500 !important;
+}
+
+.how .steps{
+  display:grid !important;
+  gap:12px !important;
+}
+
+.how .steps > div{
+  position:relative;
+  padding:22px 22px 22px 76px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(48,35,24,.92) 0%,
+      rgba(24,18,13,.96) 100%
+    ) !important;
+
+  border:1px solid rgba(201,161,94,.22) !important;
+  border-radius:18px !important;
+
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.22) !important;
+}
+
+.how .steps b{
+  position:absolute;
+  left:20px;
+  top:21px;
+
+  color:#c9a15e !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:24px !important;
+  font-weight:500 !important;
+}
+
+.how .steps h3{
+  margin:0 0 7px !important;
+
+  color:#f3eadc !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:20px !important;
+  font-weight:500 !important;
+}
+
+.how .steps p{
+  margin:0 !important;
+  color:#b9aa96 !important;
+  line-height:1.55 !important;
+}
+
+@media(max-width:560px){
+  .how{
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+}
