@@ -1064,11 +1064,3 @@ async function startStore() {
 
 
 startStore();
-
-#mainImage {
-  transition: opacity .22s ease;
-}
-
-#mainImage.fade-image {
-  opacity: .35;
-}
