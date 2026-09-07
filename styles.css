@@ -1447,3 +1447,11 @@ footer a{
   opacity:1 !important;
   font-weight:600 !important;
 }
+  /* ===== HERO IMAGE SIZE ===== */
+
+@media(max-width:560px){
+  .hero-visual{
+    min-height:270px !important;
+    height:270px !important;
+  }
+}
