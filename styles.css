@@ -1625,3 +1625,28 @@ footer a{
     inset 0 1px rgba(255,255,255,.40),
     0 10px 24px rgba(0,0,0,.24) !important;
 }
+/* ===== LUXURY BURGER MENU BACKGROUND ===== */
+
+.menu-panel{
+  background:
+    linear-gradient(
+      rgba(20,14,9,.82),
+      rgba(20,14,9,.86)
+    ),
+    url("menu-bg.PNG") center/cover no-repeat !important;
+
+  color:#f3eadc !important;
+
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.menu-panel a{
+  color:#f3eadc !important;
+}
+
+.menu-panel .menu-socials,
+.menu-panel .menu-socials a{
+  color:#c9a15e !important;
+}
+  
