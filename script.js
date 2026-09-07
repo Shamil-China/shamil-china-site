@@ -237,7 +237,24 @@ function openProduct(id) {
     mainImage.src =
       images[0] || '';
   }
+let dotsEl = document.getElementById('imageDots');
 
+if (!dotsEl && mainImage) {
+  dotsEl = document.createElement('div');
+  dotsEl.id = 'imageDots';
+  dotsEl.className = 'image-dots';
+  mainImage.insertAdjacentElement('afterend', dotsEl);
+}
+
+function updateDots() {
+  if (!dotsEl) return;
+
+  dotsEl.innerHTML = images.map((_, i) =>
+    `<span class="${i === currentImageIndex ? 'active' : ''}"></span>`
+  ).join('');
+}
+
+updateDots();
   if (variantsEl) {
     variantsEl.innerHTML =
       (product.variants || [])
