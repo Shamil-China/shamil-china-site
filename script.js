@@ -240,7 +240,52 @@ function openProduct(id) {
     mainImage.src =
       images[0] || '';
   }
+let currentImageIndex = 0;
+let touchStartX = 0;
 
+function showModalImage(index) {
+  if (!mainImage || !images.length) return;
+
+  currentImageIndex =
+    (index + images.length) % images.length;
+
+  mainImage.src = images[currentImageIndex];
+
+  if (thumbsEl) {
+    thumbsEl
+      .querySelectorAll('button')
+      .forEach((button, i) => {
+        button.classList.toggle(
+          'active',
+          i === currentImageIndex
+        );
+      });
+  }
+}
+
+if (mainImage && images.length > 1) {
+
+  mainImage.ontouchstart = (event) => {
+    touchStartX =
+      event.touches[0].clientX;
+  };
+
+  mainImage.ontouchend = (event) => {
+    const touchEndX =
+      event.changedTouches[0].clientX;
+
+    const distance =
+      touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 40) return;
+
+    if (distance < 0) {
+      showModalImage(currentImageIndex + 1);
+    } else {
+      showModalImage(currentImageIndex - 1);
+    }
+  };
+}
 
   if(variantsEl){
 
