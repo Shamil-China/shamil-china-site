@@ -1195,9 +1195,132 @@ document.addEventListener('change', async (event) => {
         data.output[0];
     }
 
-    alert(
-      '✨ Готово! Это AI-визуализация — цвет, детали и посадка могут отличаться от реального товара.'
-    );
+    const oldTryOnResult =
+  document.getElementById('tryOnResult');
+
+if (oldTryOnResult) {
+  oldTryOnResult.remove();
+}
+
+const tryOnResult =
+  document.createElement('div');
+
+tryOnResult.id = 'tryOnResult';
+
+tryOnResult.style.cssText = `
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:rgba(0,0,0,.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+`;
+
+const tryOnCard =
+  document.createElement('div');
+
+tryOnCard.style.cssText = `
+  width:min(420px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#f7f3eb;
+  border-radius:24px;
+  padding:18px;
+  box-sizing:border-box;
+  text-align:center;
+`;
+
+const resultImage =
+  document.createElement('img');
+
+resultImage.src = data.output[0];
+
+resultImage.style.cssText = `
+  width:100%;
+  display:block;
+  border-radius:18px;
+  margin-bottom:16px;
+`;
+
+const resultTitle =
+  document.createElement('h3');
+
+resultTitle.textContent =
+  'AI-примерка ✨';
+
+resultTitle.style.cssText = `
+  margin:0 0 8px;
+  font-size:22px;
+`;
+
+const resultText =
+  document.createElement('p');
+
+resultText.textContent =
+  'AI-визуализация. Цвет, детали и посадка могут отличаться от реального товара.';
+
+resultText.style.cssText = `
+  font-size:12px;
+  line-height:1.5;
+  opacity:.65;
+  margin:0 0 16px;
+`;
+
+const againBtn =
+  document.createElement('button');
+
+againBtn.type = 'button';
+againBtn.textContent =
+  '✨ Попробовать другое фото';
+
+againBtn.className = 'btn full';
+
+againBtn.onclick = () => {
+  tryOnResult.remove();
+
+  document
+    .getElementById('tryOnPhoto')
+    ?.click();
+};
+
+const closeBtn =
+  document.createElement('button');
+
+closeBtn.type = 'button';
+closeBtn.textContent = 'Закрыть';
+
+closeBtn.className = 'btn full';
+
+closeBtn.style.marginTop = '8px';
+
+closeBtn.onclick = () => {
+  tryOnResult.remove();
+};
+
+tryOnCard.append(
+  resultImage,
+  resultTitle,
+  resultText,
+  againBtn,
+  closeBtn
+);
+
+tryOnResult.appendChild(tryOnCard);
+
+tryOnResult.addEventListener(
+  'click',
+  event => {
+    if (event.target === tryOnResult) {
+      tryOnResult.remove();
+    }
+  }
+);
+
+document.body.appendChild(
+  tryOnResult
+);
 
   } catch (error) {
 
