@@ -179,21 +179,18 @@ function displayBrand(product) {
 
 function openProduct(id) {
 
-  const product =
-    products[id];
+  const product = products[id];
 
-  if(!product){
+  if (!product) {
     return;
   }
-
 
   const modal =
     document.getElementById('modal');
 
-  if(!modal){
+  if (!modal) {
     return;
   }
-
 
   const brandEl =
     document.getElementById('modalBrand');
@@ -213,36 +210,35 @@ function openProduct(id) {
   const thumbsEl =
     document.getElementById('thumbs');
 
-
-  if(brandEl){
+  if (brandEl) {
     brandEl.textContent =
       product.brand || '';
   }
 
-  if(titleEl){
+  if (titleEl) {
     titleEl.textContent =
       product.title || '';
   }
 
-  if(descEl){
+  if (descEl) {
     descEl.textContent =
       product.desc || '';
   }
-
 
   const images =
     Array.isArray(product.images)
       ? product.images.filter(Boolean)
       : [];
 
+  let currentImageIndex = 0;
+  let touchStartX = 0;
 
-  if(mainImage){
+  if (mainImage) {
     mainImage.src =
       images[0] || '';
-  
-}
-  if(variantsEl){
+  }
 
+  if (variantsEl) {
     variantsEl.innerHTML =
       (product.variants || [])
         .filter(Boolean)
@@ -251,11 +247,34 @@ function openProduct(id) {
             `<span class="variant">${escapeHtml(variant)}</span>`
         )
         .join('');
-
   }
 
+  function showImage(index) {
 
-  if(thumbsEl){
+    if (!mainImage || !images.length) {
+      return;
+    }
+
+    currentImageIndex =
+      (index + images.length) %
+      images.length;
+
+    mainImage.src =
+      images[currentImageIndex];
+
+    if (thumbsEl) {
+      thumbsEl
+        .querySelectorAll('button')
+        .forEach((button, i) => {
+          button.classList.toggle(
+            'active',
+            i === currentImageIndex
+          );
+        });
+    }
+  }
+
+  if (thumbsEl) {
 
     thumbsEl.innerHTML =
       images.map(
@@ -272,7 +291,6 @@ function openProduct(id) {
         `
       ).join('');
 
-
     thumbsEl
       .querySelectorAll('button')
       .forEach(button => {
@@ -286,44 +304,66 @@ function openProduct(id) {
                 button.dataset.imgIndex
               );
 
-            if(mainImage){
-              mainImage.src =
-                images[index] || '';
+            showImage(index);
+          }
+        );
 
+      });
   }
 
+  if (
+    mainImage &&
+    images.length > 1
+  ) {
+
+    mainImage.ontouchstart =
+      event => {
+
+        touchStartX =
+          event.touches[0].clientX;
+      };
+
+    mainImage.ontouchend =
+      event => {
+
+        const touchEndX =
+          event.changedTouches[0].clientX;
+
+        const distance =
+          touchEndX - touchStartX;
+
+        if (
+          Math.abs(distance) < 40
+        ) {
+          return;
+        }
+
+        if (distance < 0) {
+          showImage(
+            currentImageIndex + 1
+          );
+        } else {
+          showImage(
+            currentImageIndex - 1
+          );
+        }
+      };
+  }
 
   const priceEl =
     document.querySelector(
       '.price-line b'
     );
 
-  if(priceEl){
+  if (priceEl) {
     priceEl.textContent =
       product.price || 'Уточняйте';
   }
-
 
   modal.classList.add('show');
 
   document.body.style.overflow =
     'hidden';
-
-}
-
-
-function closeModal() {
-
-  const modal =
-    document.getElementById('modal');
-
-  if(modal){
-    modal.classList.remove('show');
-  }
-
-  document.body.style.overflow =
-    '';
-
 }
 
 
