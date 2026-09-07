@@ -537,3 +537,70 @@ body{
     border-radius:22px;
   }
 }
+/* ===== LUXURY MOBILE HERO — STEP 2 ===== */
+
+@media (max-width:560px){
+
+  .hero{
+    display:block;
+    padding-bottom:0;
+  }
+
+  .hero-copy{
+    position:relative;
+    z-index:2;
+  }
+
+  .hero-copy::after{
+    content:"";
+    display:block;
+    width:56px;
+    height:1px;
+    margin-top:28px;
+    background:#c9a15e;
+  }
+
+  .hero-visual{
+    width:calc(100% + 36px);
+    margin-left:-18px;
+    margin-top:28px;
+    min-height:540px;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    border-color:rgba(201,161,94,.22);
+    box-shadow:
+      0 -25px 60px rgba(0,0,0,.18),
+      0 30px 80px rgba(0,0,0,.35);
+  }
+
+  .hero-visual::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(20,14,9,.35) 0%,
+        transparent 28%,
+        transparent 70%,
+        rgba(15,11,8,.28) 100%
+      );
+  }
+
+  .hero-visual img{
+    object-fit:cover;
+  }
+
+  .hero-label{
+    z-index:2;
+    left:20px;
+    bottom:20px;
+    color:#d6b574;
+    background:rgba(20,15,10,.72);
+    border:1px solid rgba(201,161,94,.35);
+    backdrop-filter:blur(12px);
+  }
+}
