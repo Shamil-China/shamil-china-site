@@ -1471,6 +1471,178 @@ async function changeClientBonus(userId, amount) {
     'ok'
   );
 }
+  async function loadOrders() {
+  const list = $('ordersList');
+
+  if (!list) return;
+
+  list.innerHTML =
+    '<div class="muted">Загрузка…</div>';
+
+  const { data, error } = await sb
+    .from('orders')
+    .select(`
+      id,
+      user_id,
+      product_title,
+      product_brand,
+      amount,
+      status,
+      created_at
+    `)
+    .order('created_at', {
+      ascending: false
+    });
+
+  if (error) {
+    list.innerHTML =
+      '<div class="muted">Не удалось загрузить заказы.</div>';
+
+    setStatus(
+      $('ordersStatus'),
+      'Ошибка: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  if (!data || !data.length) {
+    list.innerHTML =
+      '<div class="muted">Заказов пока нет.</div>';
+    return;
+  }
+
+  list.innerHTML = data.map(order => `
+    <div class="product-item">
+      <div>
+        <strong>${esc(order.product_title || 'Заказ')}</strong>
+        <div class="muted">
+          ${esc(order.product_brand || 'Без бренда')}
+        </div>
+        <div>
+          ${Number(order.amount || 0).toLocaleString('ru-RU')} ₽
+        </div>
+        <div class="muted">
+          Статус: ${esc(order.status || 'В обработке')}
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          class="btn"
+          type="button"
+          onclick="editOrder('${order.id}')"
+        >
+          ✏️ Изменить
+        </button>
+
+        <button
+          class="btn danger"
+          type="button"
+          onclick="deleteOrder('${order.id}')"
+        >
+          🗑 Удалить
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+  async function editOrder(orderId) {
+  const { data: order, error } = await sb
+    .from('orders')
+    .select('id, product_title, product_brand, amount, status')
+    .eq('id', orderId)
+    .single();
+
+  if (error || !order) {
+    setStatus(
+      $('ordersStatus'),
+      'Не удалось открыть заказ.',
+      'err'
+    );
+    return;
+  }
+
+  const title = prompt(
+    'Название товара:',
+    order.product_title || ''
+  );
+  if (title === null) return;
+
+  const brand = prompt(
+    'Бренд:',
+    order.product_brand || ''
+  );
+  if (brand === null) return;
+
+  const rawAmount = prompt(
+    'Сумма заказа:',
+    order.amount || 0
+  );
+  if (rawAmount === null) return;
+
+  const amount = Number(
+    String(rawAmount).replace(/\s/g, '').replace(',', '.')
+  );
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    setStatus($('ordersStatus'), 'Неверная сумма.', 'err');
+    return;
+  }
+
+  const status = prompt(
+    'Статус заказа:',
+    order.status || 'В обработке'
+  );
+  if (status === null) return;
+
+  const { error: updateError } = await sb.rpc(
+    'admin_update_order',
+    {
+      p_order_id: orderId,
+      p_product_title: title.trim(),
+      p_product_brand: brand.trim(),
+      p_amount: amount,
+      p_status: status.trim() || 'В обработке'
+    }
+  );
+
+  if (updateError) {
+    setStatus(
+      $('ordersStatus'),
+      'Ошибка: ' + updateError.message,
+      'err'
+    );
+    return;
+  }
+
+  setStatus($('ordersStatus'), 'Заказ обновлён ✅', 'ok');
+  await loadOrders();
+}
+
+
+async function deleteOrder(orderId) {
+  if (!confirm('Удалить этот заказ?')) return;
+
+  const { error } = await sb.rpc(
+    'admin_delete_order',
+    {
+      p_order_id: orderId
+    }
+  );
+
+  if (error) {
+    setStatus(
+      $('ordersStatus'),
+      'Ошибка удаления: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  setStatus($('ordersStatus'), 'Заказ удалён ✅', 'ok');
+  await loadOrders();
+}
 /* =========================
    ЗАГРУЗКА ТОВАРОВ
 ========================= */
