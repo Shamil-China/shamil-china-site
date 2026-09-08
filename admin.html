@@ -1479,20 +1479,9 @@ async function changeClientBonus(userId, amount) {
   list.innerHTML =
     '<div class="muted">Загрузка…</div>';
 
-  const { data, error } = await sb
-    .from('orders')
-    .select(`
-      id,
-      user_id,
-      product_title,
-      product_brand,
-      amount,
-      status,
-      created_at
-    `)
-    .order('created_at', {
-      ascending: false
-    });
+  const { data, error } = await sb.rpc(
+  'admin_list_orders'
+);
 
   if (error) {
     list.innerHTML =
@@ -1516,6 +1505,12 @@ async function changeClientBonus(userId, amount) {
     <div class="product-item">
       <div>
         <strong>${esc(order.product_title || 'Заказ')}</strong>
+        <div style="margin-bottom:10px">
+  <strong>👤 ${esc(order.client_name || 'Клиент')}</strong>
+  <div class="muted">
+    ${esc(order.client_email || '')}
+  </div>
+</div>
         <div class="muted">
           ${esc(order.product_brand || 'Без бренда')}
         </div>
