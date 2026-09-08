@@ -553,7 +553,48 @@ body{
         $('profileLevel').textContent = level;
         $('totalSpent').textContent =
           Number(profile?.total_spent || 0).toLocaleString('ru-RU') + ' ₽';
+const { data: orders, error: ordersError } = await client
+  .from('orders')
+  .select('product_title, product_brand, amount, bonus_earned, status, created_at')
+  .eq('user_id', user.id)
+  .order('created_at', { ascending: false });
 
+if (ordersError) {
+  console.error('Orders error:', ordersError);
+}
+
+const ordersList = $('ordersList');
+
+if (ordersList) {
+  if (!orders || orders.length === 0) {
+    ordersList.innerHTML =
+      '<div class="orders-empty">Заказов пока нет</div>';
+  } else {
+    ordersList.innerHTML = orders.map(order => {
+      const statusMap = {
+        new: 'Новый',
+        processing: 'В работе',
+        shipped: 'Отправлен',
+        delivered: 'Доставлен',
+        cancelled: 'Отменён'
+      };
+
+      return `
+        <div class="order-item">
+          <div class="order-brand">${order.product_brand || 'SHAMIL | CHINA'}</div>
+          <div class="order-name">${order.product_title || 'Заказ'}</div>
+          <div class="order-meta">
+            ${Number(order.amount || 0).toLocaleString('ru-RU')} ₽ ·
+            ${statusMap[order.status] || order.status}
+          </div>
+          <div class="order-bonus">
+            +${Number(order.bonus_earned || 0).toLocaleString('ru-RU')} бонусов
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
         $('loadingView').style.display = 'none';
         $('authView').style.display = 'none';
         $('profileView').style.display = 'block';
