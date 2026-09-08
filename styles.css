@@ -1430,14 +1430,13 @@ body{
 .modal-card #tryOnBtn{
   background:linear-gradient(
     135deg,
-    #d8b36d 0%,
-    #efd59d 48%,
-    #c99c50 100%
+    #d8b878 0%,
+    #b98b52 100%
   ) !important;
 
-  color:#24170d !important;
-
-  border:1px solid rgba(201,161,94,.45) !important;
+  color:#24170f !important;
+  border:1px solid #c49a5a !important;
+  box-shadow:none !important;
 }
 
 /* Instagram и Telegram специально НЕ меняем */
