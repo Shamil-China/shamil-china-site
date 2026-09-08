@@ -1360,7 +1360,90 @@ async function changeClientBonus(userId, amount) {
 
   await loadClients();
 }
-  
+  async function createClientOrder(userId, clientName) {
+
+  const productTitle = prompt(
+    `Товар для клиента ${clientName}:`
+  );
+
+  if (productTitle === null) return;
+
+  if (!productTitle.trim()) {
+    setStatus(
+      $('clientsStatus'),
+      'Введите название товара.',
+      'err'
+    );
+    return;
+  }
+
+  const productBrand = prompt(
+    'Бренд товара (можно оставить пустым):'
+  );
+
+  if (productBrand === null) return;
+
+  const rawAmount = prompt(
+    'Сумма заказа в ₽:'
+  );
+
+  if (rawAmount === null) return;
+
+  const amount = Number(
+    rawAmount.replace(/\s/g, '').replace(',', '.')
+  );
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    setStatus(
+      $('clientsStatus'),
+      'Введите правильную сумму заказа.',
+      'err'
+    );
+    return;
+  }
+
+  const status = prompt(
+    'Статус заказа:',
+    'В обработке'
+  );
+
+  if (status === null) return;
+
+  if (!confirm(
+    `Оформить заказ?\n\nКлиент: ${clientName}\nТовар: ${productTitle}\nСумма: ${amount.toLocaleString('ru-RU')} ₽\nСтатус: ${status}`
+  )) return;
+
+  setStatus(
+    $('clientsStatus'),
+    'Создаём заказ…'
+  );
+
+  const { data, error } = await sb.rpc(
+    'admin_create_order',
+    {
+      target_user_id: userId,
+      p_product_title: productTitle.trim(),
+      p_product_brand: productBrand.trim(),
+      p_amount: amount,
+      p_status: status.trim() || 'В обработке'
+    }
+  );
+
+  if (error) {
+    setStatus(
+      $('clientsStatus'),
+      'Ошибка создания заказа: ' + error.message,
+      'err'
+    );
+    return;
+  }
+
+  setStatus(
+    $('clientsStatus'),
+    'Заказ оформлен ✅ Он уже появился в истории клиента.',
+    'ok'
+  );
+}
 /* =========================
    ЗАГРУЗКА ТОВАРОВ
 ========================= */
